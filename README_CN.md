@@ -98,7 +98,7 @@ location / {
 
 如果您有任何好的建议、参考设计或开源代码，请随时通过 Pull requests 与我们分享。如果您是 UI 设计专家，但不懂编程，您可以提交 Issue，或将您的想法或设计发送至 [2261129603@qq.com](mailto:2261129603@qq.com) 或 [master@pafworld.top](mailto:master@pafworld.top)，或加入 [Telegram](https://t.me/pafnetwork) 群组。我们欢迎您的参与。
 
-### 特别感谢以下项目为我们提供灵感、参考设计和核心代码：
+### 特别感谢以下项目为我们提供灵感、参考设计或核心代码：
 
 - [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)
 - [qier222/YesPlayMusic](https://github.com/qier222/YesPlayMusic)
