@@ -5,8 +5,7 @@ const user = require('./blurlyric/user');
 const match = require('@unblockneteasemusic/server');
 const fs = require("fs")
 const path = require("path")
-const fetch = require( 'node-fetch');
-
+const fetchModulePromise = import('node-fetch');
 router.get('/createUser',(req,res)=>{
 
     user.createUser((data)=>{
@@ -105,6 +104,9 @@ function strSize(str, charset) {
 
 async function getFileByUrl(url,fileName){
     console.log('['+(downloadTrack.now+1) + '/'+downloadTrack.list.length+']请求下载 ' + fileName)
+    
+const fetchModule = await fetchModulePromise;
+const fetch = fetchModule.default;
     await fetch(url,   {
         method: 'GET',
         headers: { 'Content-Type': 'application/octet-stream' },

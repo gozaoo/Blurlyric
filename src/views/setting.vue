@@ -197,7 +197,7 @@
   export default setting
 </script>
 
-<style >
+<style scoped>
 
   .setline {
     font-size: 18px;

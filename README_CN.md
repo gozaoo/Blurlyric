@@ -1,16 +1,12 @@
 <h1 align="center"><img src="https://blurlyric.app/favicon.svg" alt="img" style="zoom:3%;" />BlurLyric</h1>
 
-<p align="center"><i>一款简单、美观且用户友好的网易云音乐第三方播放器。</i></p>
+<p align="center"><i>一款简单、美观、努力优化性能且用户友好的网易云音乐第三方播放器。</i></p>
 
 <p align="center"><a href="README.md">English</a> | 简体中文</p>
 
 ## 许可证
 
 [![FOSSA 状态](https://app.fossa.com/api/projects/git%2Bgithub.com%2FProject-And-Factory%2FBlurLyric.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FProject-And-Factory%2FBlurLyric?ref=badge_large)
-
-## 快速开始
-
-我们建议使用 [官方网站](https://web.blurlyric.app/) 进行快速体验。请注意，谨防不熟悉的链接，以防止账户或隐私被盗。
 
 ## 浏览器支持
 
@@ -54,17 +50,6 @@ node .\blurlyric\onlyonweb
 
 端口可以在 `vite.config.js` 中进行修改。
 
-## 手动构建可执行文件
-
-在命令行中输入以下命令以手动构建可执行文件，输出将位于 `out` 文件夹中：
-
-```
-npm run build
-```
-
-```
-npm run make
-```
 
 ## 服务器
 

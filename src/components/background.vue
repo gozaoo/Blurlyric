@@ -90,5 +90,15 @@
 </template>
 
 <style>
-
+  .player-background{
+    animation: spawnplayerbackground 0.3s linear;
+  }
+  @keyframes spawnplayerbackground {
+    from{
+      opacity: 0;
+    }
+    to{
+      opacity: 1;
+    }
+  }
 </style>

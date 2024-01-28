@@ -151,8 +151,20 @@
       <div class="scroll-thumb"></div>
     </div>
   </div>
-
-  <div  id="player" >
+  <musicInfoPage :playerState="{
+    currentTime: data.player.uiDisplay.realCurrTime,
+    icurrentTime: data.player.uiDisplay.currTime,
+    durationTime: data.player.uiDisplay.duration,
+    audioState:state.playing
+  }" 
+  :controls="{
+    nextTrack: this.nextMusic,
+    prevTrack: this.upMusic,
+    play: this.plays,
+    pause: this.audio.pause
+  }"
+  :musicInfo="data.player.tracks[data.player.trackNum]" />
+  <div style="visibility: hidden; " id="player" >
     <!--迷你控制器-->
     <div class="player-Mini"  >
       <div>
@@ -749,7 +761,7 @@
 import { transform } from '@vue/compiler-core'
 import { nextTick } from 'vue';
 
-
+  import musicInfoPage from './components/musicInfoPage.vue';
   var bodyHeight, bodyWidth,
     transitionning = false,
     usingLowWidhtMedi, lastTime = 0
@@ -793,7 +805,8 @@ import { nextTick } from 'vue';
   var vueApp = {
     components:{
       background,
-      login_components
+      login_components,
+      musicInfoPage
     },
     data() {
       return {
@@ -859,7 +872,7 @@ import { nextTick } from 'vue';
               "al": {
                 "id": 0,
                 "name": "",
-                "picUrl": "/src/assets/icon.png",
+                "picUrl": "&quot;&quot;",
                 "tns": [],
                 "pic_str": "0",
                 "pic": 0
