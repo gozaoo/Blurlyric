@@ -3,7 +3,7 @@
     import background from "./background.vue";
     import elemListener from "../js/elemListener.js"
     import anime from 'animejs/lib/anime.es.js';
-
+    import lyricVue from "./lyric.vue";
     export default {
         data() {
             return {
@@ -33,7 +33,8 @@
             }
         },
         components: {
-            background
+            background,
+            lyricVue
         },
         methods: {
             changeDisplayState(area, speed) {
@@ -53,11 +54,15 @@
                             easing: 'spring(1,100, 60, ' + speed + ')',
                         })
                         anime({
+                            targets: this.$refs.menu,
+                            easing: 'linear',
+                            duration: 100,
+                            opacity: 1,
+                        })
+                        anime({
                             targets: this.$refs.miniControlBar,
                             opacity: 0,
                             right: ['0px', '-' + this.$refs.miniControlBar.offsetWidth + 'px'],
-                            duration: 300,
-                            easing: 'linear',
                             easing: 'spring(1,100, 60, ' + speed + ')',
                         })
                         anime({
@@ -100,7 +105,7 @@
                         anime({
                             targets: this.$refs.player,
                             height: [this.$refs.player.offsetHeight + "px", '100px'],
-                            easing: 'spring(1, 80, 60,' + speed + ')',
+                            easing: 'spring(1, 100, 60,' + speed + ')',
                             finished: () => {
                                 anime({
                                     targets: self.$refs.player,
@@ -108,6 +113,12 @@
                                     easing: 'spring(1, 100, 60,  ' + speed + ')',
                                 })
                             }
+                        })
+                        anime({
+                            targets: this.$refs.menu,
+                            easing: 'linear',
+                            duration: 100,
+                            opacity: 0,
                         })
                         anime({
                             targets: this.$refs.miniControlBar,
@@ -146,7 +157,9 @@
         props: {
             musicInfo: Object,
             controls: Object,
-            playerState: Object
+            playerState: Object,
+            lyric: Object,
+            audio: HTMLAudioElement
         },
         watch: {
             musicInfo: {
@@ -204,7 +217,7 @@
                     </div>
                 </div>
             </div>
-            <div class="menu">
+            <div style="opacity:0" ref="menu" class="menu">
 
                 <div ref="coverImagePlaceHolder" class="coverImage"
                     style="image-rendering: auto; transition: background-image 0.5s linear 0s, box-shadow 0.5s ease 0s, transform 0.5s cubic-bezier(0.3, 0.2, 0.2, 1.4) 0s;">
@@ -251,7 +264,10 @@
                         </button></div>
 
                 </div>
-
+                <lyricVue class="lyricRow" :importedConfig="{
+                    usingwfwLyric: true,
+                    energySavingMode: false
+                }" :audioDom="audio" :lyricText="lyric" />
             </div>
         </div>
 
@@ -366,7 +382,7 @@
         /* top: 20px; */
         height: 60px;
         width: calc(100% - 60px);
-        z-index: 1;
+        z-index: 2;
     }
 
     .hiddenControlBar .info {
@@ -442,7 +458,10 @@
         left: 0%;
         z-index: 0
     }
-
+    .lyricRow {
+        grid-column: player-side;
+        grid-row: drag-area;
+    }    
     .coverImage {
         color: rgb(255, 255, 255);
         aspect-ratio: 1/1;

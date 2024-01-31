@@ -4,7 +4,9 @@
   padding: 0;
   margin: 0;
   width: 100vw;
-  height: 10vh
+  height: 10vh;
+
+  
 }
 
 h1 {
@@ -33,13 +35,17 @@ img[src=""]{
 html,
 body {
   padding: 0;
+
   margin: 0
 }
+html{
+  background: var(--hsla-white);
 
+}
 :root {
   --paddingIndex-MaxWidth: calc(100vw - calc(var(--paddingIndex) + var(--paddingIndex)));
   --paddingIndex: 12vw;
-  --hsla-white: hsla(0, 0%, 95%, .4);
+  --hsla-white: rgb(249,249,249);
   --minplayerHeight: 48px;
   --leftlab-width: 56px;
   --color-theme: #0080ff;
@@ -106,7 +112,7 @@ body {
   color: #444;
   font-size: 26px;
   align-content: center;
-  background-color: #fff;
+  background: var(--hsla-white);
   gap: 12px;
   flex-direction: column;
   z-index: 100;
@@ -258,14 +264,16 @@ input#searchInput,
   font-size: 14px;
   text-decoration: none;
   padding: 5px 10px;
-  border-radius: 7px;
+  border-radius: 2px;
   transition: all .2s cubic-bezier(.3, .45, .2, .95);
   color: #2c3e50;
   border: none;
   background: #00000008;
   outline: none;
   width: 200px;
-  margin: 10px 0
+  margin: 6px 0;
+  height: 18px;
+  border: solid #0001 1px;
 }
 
 #searchInputTemp {
@@ -303,7 +311,8 @@ input#searchInput,
   position: relative;
   display: flex;
   gap: 12px;
-  background-color: #fff;
+  background: var(--hsla-white);
+  /* background-color: #fff; */
   z-index: 1;
   align-items: center
 }
@@ -395,7 +404,7 @@ input#searchInput,
 .viewBox {
   transition: transform .2s cubic-bezier(.3, .5, .2, 1);
   will-change: transform;
-
+  
 }
 .viewBox[anime=true]{
   animation: spawn3 .45s cubic-bezier(0,1,.5,1);
@@ -413,14 +422,13 @@ input#searchInput,
 }
 .scrollBox{
   float: left;
-  background: var(--hsla-white);
   padding: 20px 20px 84px 20px;
   /* margin-top: 3px; */
-
+  border: 1px #0001 solid;
   /* margin-right: 3px; */
-  height: 100%;
+  height: 100%;background-color: #fff;
   overflow-y: auto;
-  border-radius: 12px 0 0 0;
+  /* border-radius: 12px 0 0 0; */
 }
 .scrollBox:hover{
   padding: 20px 12px 84px 20px;
@@ -1444,7 +1452,7 @@ li div.Padding {
   display: inline;
   background-origin: content-box;
   background-clip: text;
-  --background-transition-linear-gradient-progress-width: .25em;
+  --background-transition-linear-gradient-progress-width: 1em !important;
   background: linear-gradient(90deg,rgb(0,0,0,.6) 0%,rgb(0,0,0,.6) calc(50% - calc(var(--background-transition-linear-gradient-progress-width)/2)), rgba(0,0,0,.12)  calc(50% + calc(var(--background-transition-linear-gradient-progress-width)/2)),rgba(0,0,0,.12) 100%);
   background-size: calc(200% + var(--background-transition-linear-gradient-progress-width) * 2) 100%;
   -webkit-background-clip: text;

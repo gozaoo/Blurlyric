@@ -2,27 +2,32 @@
   <!--audio v-bind:src="data.player.now.musicUrl[data.player.musicCache[id].song].url"
     @pause='state.playing=false' @play='state.playing=true' @ended="finishPlay" ref="audio" id="audio"
     @timeupdate="getCurr" @canplay="showLong"></audio-->
-    <login_components :display="data.ui.loginElement" :close="()=>{data.ui.loginElement = 'hidden'}"></login_components>
+  <login_components :display="data.ui.loginElement" :close="()=>{data.ui.loginElement = 'hidden'}"></login_components>
 
-    <div class="windowControlBar">
-      <div class="min" @click="blurLyricElectronWindowControl('min')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
-</svg></div>
-      <div class="max" @click="blurLyricElectronWindowControl('max')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-fullscreen" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"/>
-</svg></div>
-      <div class="close" @click="blurLyricElectronWindowControl('close')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-</svg></div>
-    </div>
+  <div class="windowControlBar">
+    <div class="min" @click="blurLyricElectronWindowControl('min')"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+        height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
+      </svg></div>
+    <div class="max" @click="blurLyricElectronWindowControl('max')">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-fullscreen"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z" />
+      </svg></div>
+    <div class="close" @click="blurLyricElectronWindowControl('close')">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg"
+        viewBox="0 0 16 16">
+        <path
+          d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+      </svg></div>
+  </div>
   <!--图片预缓存
     
     作用：使背景图片提前加载实现渐变
     -->
 
-  
+
   <div style="visibility: hidden;height: 0px;width: 0px;overflow: hidden;">
     <img v-if="data.player.tracks[data.player.trackNum + 1]"
       v-bind:src="data.player.tracks[data.player.trackNum + 1].al.picUrl + '?param=128y128'" alt="" srcset="">
@@ -101,7 +106,8 @@
         </svg><a>播放列表</a>
       </router-link>
       <hr v-if="data.ui.leftSideWidth == 'iconWithText'" style="color:#00000050;width:100%;margin: 2px 0">
-      <a v-if="data.ui.leftSideWidth == 'iconWithText' " v-for="(item,i) in data.myMusicList" @click="this.$router.push({name:'detail',query:{id:item.id }})">
+      <a v-if="data.ui.leftSideWidth == 'iconWithText' " v-for="(item,i) in data.myMusicList"
+        @click="this.$router.push({name:'detail',query:{id:item.id }})">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note-list"
           viewBox="0 0 16 16">
           <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z" />
@@ -156,505 +162,15 @@
     icurrentTime: data.player.uiDisplay.currTime,
     durationTime: data.player.uiDisplay.duration,
     audioState:state.playing
-  }" 
-  :controls="{
+  }" :controls="{
     nextTrack: this.nextMusic,
     prevTrack: this.upMusic,
     play: this.plays,
     pause: this.audio.pause
-  }"
-  :musicInfo="data.player.tracks[data.player.trackNum]" />
-  <div style="visibility: hidden; " id="player" >
-    <!--迷你控制器-->
-    <div class="player-Mini"  >
-      <div>
-        <div @click="mainDisplayChange()" class="player-Mini-img">
+  }" :audio="this.audio" 
+  :lyric="(this.data.player.musicCache[id])?this.data.player.musicCache[id].lyric:({
+              type: 'none'})" :musicInfo="data.player.tracks[data.player.trackNum]" />
 
-          <img v-bind:src="data.player.tracks[data.player.trackNum].al.picUrl +'?param=1024y1024'" alt="" srcset="">
-          <img v-bind:src="data.player.tracks[data.player.trackNum].al.picUrl +'?param=1024y1024'" alt="" srcset="">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-              d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-          </svg>
-        </div>
-
-        <div class="player-Mini-Title">
-          <h1>{{data.player.tracks[data.player.trackNum].name}} <a
-              v-for="(alia,i) in data.player.tracks[data.player.trackNum].alia" :key="i"
-              style="color: rgba(44,62,80,0.5)"> {{alia}}</a></h1>
-          <h2><a v-for="item in data.player.tracks[data.player.trackNum].ar" :key="item.id">{{item.name}} </a>
-          </h2>
-        </div>
-      </div>
-      <div  v-if="data.player.uiDisplay.mainDisplay != 'top'" class="player-Mini-Contorl">
-        <!--播放按键-->
-        <!--喜欢按钮-->
-        <a @click="loveMusic()"
-          v-if="(data.musicListInfor.myLove.aRtrackIds.indexOf(data.player.tracks[data.player.trackNum].id) != -1)"
-          style="color:red;user-select:none">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" fill="currentColor" class="bi bi-heart-fill"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-          </svg>
-        </a>
-        <a @click="loveMusic()"
-          v-if="(data.musicListInfor.myLove.aRtrackIds.indexOf(data.player.tracks[data.player.trackNum].id) == -1)"
-          style="user-select:none">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-heart"
-            viewBox="0 0 16 16">
-            <path
-              d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-          </svg>
-        </a>
-        <!--上一曲-->
-        <a v-if="state.random != true && data.musicListInfor.personalFM.use == false" @click="upMusic()"
-          class="minWidthUnneed player-Mini-Contorl-normal">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-skip-start" viewBox="0 0 16 16">
-            <path
-              d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L5 8.752V12a.5.5 0 0 1-1 0V4zm7.5.633L5.696 8l5.804 3.367V4.633z" />
-            =</svg>
-        </a>
-        <!--私人-不喜欢-->
-        <a @click="notLovePerFm()" v-if="data.musicListInfor.personalFM.use == true"
-          class="minWidthUnneed player-Mini-Contorl-normal">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
-            viewBox="0 0 16 16">
-            <path
-              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-            <path fill-rule="evenodd"
-              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-          </svg>
-        </a>
-
-        <!--播放按键-->
-        <a class="player-Mini-Contorl-normal elm-play" @click="plays()">
-          <!--未播放样式-->
-          <svg v-if="( state.playing == false && audio.readyState >= 2)" xmlns="http://www.w3.org/2000/svg"
-            class="bi bi-play-fill" viewBox="0 0 16 16">
-            <path
-              d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
-          </svg>
-          <!--正播放样式-->
-          <svg v-if="( state.playing != false && audio.readyState >= 2)" xmlns="http://www.w3.org/2000/svg"
-            class="bi bi-pause-fill" viewBox="0 0 16 16">
-            <path
-              d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z" />
-          </svg>
-          <svg v-if="( audio.readyState < 2 )" xmlns="http://www.w3.org/2000/svg" class="bi-arrow-clockwise bi"
-            fill="currentColor" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
-            <path
-              d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
-          </svg>
-        </a>
-        <!--下一曲-->
-        <a class="player-Mini-Contorl-normal" @click="nextMusic()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-end"
-            viewBox="0 0 16 16">
-            <path
-              d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.713 3.31 4 3.655 4 4.308v7.384c0 .653.713.998 1.233.696L11.5 8.752V12a.5.5 0 0 0 1 0V4zM5 4.633 10.804 8 5 11.367V4.633z" />
-          </svg>
-        </a>
-
-
-      </div>
-      <!--
-	v-bind:style="'background-image:url('+ data.player.tracks[data.player.trackNum].al.picUrl +')'"
-	'--color1:' + 	data.player.uiDisplay.color[0]+ ';' + 
-	-->
-    </div>
-
-    <background  :dynamic="true" :imgSrc="data.player.tracks[data.player.trackNum].al.picUrl" :mainDisplay="data.player.uiDisplay.mainDisplay" />
-    <!--
-        主UI界面      v-bind:style="'background-image:"
-      -->
-    <!--控制界面按钮-->
-    <div class="playertopbar">
-      <div v-if="(data.player.uiDisplay.mainDisplay != 'buttom')" class="electron-control">
-        <div class="dragBar">
-          <div class="dragbarLine"></div>
-        </div>
-      </div>
-      <svg @click="mainDisplayChange()" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-        class="bi bi-chevron-down to-bottom-buttom" viewBox="0 0 16 16">
-        <path fill-rule="evenodd"
-          d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-      </svg>
-
-
-      <div class="player-Title displayTop">
-        <h1>{{data.player.tracks[data.player.trackNum].name}} <a
-            v-for="(alia,i) in data.player.tracks[data.player.trackNum].alia" :key="i"
-            style="color: rgba(44,62,80,0.5);font-size: 0.8em;"> {{alia}}</a><a
-            style="font-size: 0.7em;background-color: #00000010;padding: 0 0.3em;border-radius: .3em;"
-            v-if="(data.player.musicCache[id]&&data.player.musicCache[id].song.br >= 900000)">FLAC</a></h1>
-        <h2>
-          <div v-for="item in data.player.tracks[data.player.trackNum].ar" :key="item.id" class="artistText" @click="this.$router.push({
-            name: 'artist',
-            query: {
-              id: item.id
-            }
-          })">{{item.name}}
-          </div>&nbsp;-&nbsp;<div class="artistText" @click="this.$router.push({
-            name: 'album',
-            query: {
-              id: data.player.tracks[data.player.trackNum].al.id
-            }
-          })">
-            {{data.player.tracks[data.player.trackNum].al.name}}
-          </div>
-        </h2>
-      </div>
-      <div class="contorlPage lowWidthDisplay">
-        <a @click="data.player.uiDisplay.playerSelec = 'song';getWindowInfo()"
-          :style="(data.player.uiDisplay.playerSelec == 'song')?'color: black;':''">歌曲</a>
-
-        <a @click="data.player.uiDisplay.playerSelec = 'lyric';getWindowInfo()"
-          :style="(data.player.uiDisplay.playerSelec == 'lyric')?'color: black;':''">歌词</a>
-
-
-      </div>
-
-    </div>
-    <!--display-->
-    <div v-bind:class="data.player.uiDisplay.playerSelec + ' playerDisplayOutBox'"
-      :style="{
-        'display': data.player.uiDisplay.displayPlayBox
-  }">
-      <div v-bind:state-playing="state.playing" class="left-side playerIndexSide">
-
-        <img v-bind:src="data.player.tracks[data.player.trackNum].al.picUrl + '?param=128y128'"
-          class="ImageBlurBackground">
-
-        <!--图像-->
-        <!--加载图像-->
-        <div class="left-sideImage">
-          <!--前台图像-->
-          <div
-            v-bind:style="'background-image: url(' + data.player.tracks[data.player.trackNum].al.picUrl + '?param=1000y1000),url(' + data.player.tracks[data.player.trackNum].al.picUrl + '?param=128y128)'">
-
-          </div>
-          <img v-bind:src="data.player.tracks[data.player.trackNum].al.picUrl + '?param=1000y1000'" importance="high">
-        </div>
-
-
-        <div class="player-Title lowWidthDisplay">
-          <h1>{{data.player.tracks[data.player.trackNum].name}} <a
-              v-for="(alia,i) in data.player.tracks[data.player.trackNum].alia" :key="i"
-              style="color: rgba(44,62,80,0.5);font-size: 0.8em;"> {{alia}}</a><a
-              style="font-size: 0.7em;background-color: #00000010;padding: 0 0.3em;border-radius: .3em;"
-              v-if="data.player.musicCache[id]&&(data.player.musicCache[id].song.br >= 900000)">FLAC</a></h1>
-          <h2><a v-for="item in data.player.tracks[data.player.trackNum].ar" :key="item.id" class="artistText" @click="this.$router.push({
-            name: 'artist',
-            query: {
-              id: item.id
-            }
-          })">{{item.name}}
-            </a><a @click="this.$router.push({
-            name: 'album',
-            query: {
-              id: data.player.tracks[data.player.trackNum].al.id
-            }
-          })">&nbsp;-&nbsp;
-              {{data.player.tracks[data.player.trackNum].al.name}}
-            </a></h2>
-          <div class="lowWidthDisplay" 
-            v-if="this.data.player.musicCache[this.id]&&this.data.player.musicCache[this.id].lyric.ms[this.data.player.uiDisplay.LineNum]&&data.player.uiDisplay.playerSelec == 'song'">
-            {{this.data.player.musicCache[this.id].lyric.ms[this.data.player.uiDisplay.LineNum].c}}
-            <div v-if="(this.data.player.musicCache[id].lyric.tran == true)">
-              {{this.data.player.musicCache[this.id].lyric.ms[this.data.player.uiDisplay.LineNum].tranC}}</div>
-          </div>
-        </div>
-        <!--进度条-->
-        <div class="musicContorlCurrTime">
-
-          <div id="audioProgress" v-bind:style="'--musicProgressPercent:' + data.player.uiDisplay.progress"
-            class="box-progressbar">
-            <div id="progress"></div>
-            <div id="pointer"></div>
-          </div>
-          <div style="display:flex;justify-content: space-between ">
-            <div>{{formTime(data.player.uiDisplay.currTime)}}</div>
-            <div>{{formTime(data.player.uiDisplay.duration)}}</div>
-          </div>
-        </div>
-        <!--播放按键-->
-        <!--
-        电脑版
-      -->
-        <div class="linkbox heightWidthDisplay">
-          <!--上一曲-->
-          <a v-if="state.random != true && data.musicListInfor.personalFM.use == false" @click="upMusic()">
-            <svg xmlns="http://www.w3.org/2000/svg" style="height: 3.2vh; width: 3.2vh" fill="currentColor"
-              class="bi bi-skip-start" viewBox="0 0 16 16">
-              <path
-                d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L5 8.752V12a.5.5 0 0 1-1 0V4zm7.5.633L5.696 8l5.804 3.367V4.633z" />
-              =</svg>
-          </a>
-          <!--私人-不喜欢-->
-          <a @click="notLovePerFm()" v-if="data.musicListInfor.personalFM.use == true"
-            class="minWidthUnneed player-Mini-Contorl-normal">
-            <svg xmlns="http://www.w3.org/2000/svg" style="height: 3.2vh; width: 3.2vh" fill="currentColor"
-              class="bi bi-trash" viewBox="0 0 16 16">
-              <path
-                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-              <path fill-rule="evenodd"
-                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-            </svg>
-          </a>
-
-          <!--播放按键-->
-          <a @click="plays()">
-            <!--未播放样式-->
-            <svg v-if="( state.playing == false && audio.readyState >= 2)" xmlns="http://www.w3.org/2000/svg"
-              style="height: 4.5vh; width: 4.5vh" fill="currentColor" class="bi bi-play-fill" viewBox="0 0 16 16">
-              <path
-                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
-            </svg>
-            <!--正播放样式-->
-            <svg v-if="( state.playing != false && audio.readyState >= 2)" xmlns="http://www.w3.org/2000/svg"
-              style="height: 4.5vh; width: 4.5vh" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 16 16">
-              <path
-                d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z" />
-            </svg>
-            <svg style="height: 4.5vh; width: 4.5vh" v-if="( audio.readyState < 2 )" xmlns="http://www.w3.org/2000/svg"
-              width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
-              <path
-                d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
-            </svg>
-          </a>
-          <!--下一曲/随机-->
-          <a @click="nextMusic()">
-            <svg style="height: 3vh; width: 3vh" v-if="state.random == true" t="1657019671848" class="icon"
-              viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2140" width="1024"
-              height="1024">
-              <path
-                d="M336 73.6l406.4 412.8c12.8 12.8 12.8 38.4 0 51.2L336 950.4c-12.8 12.8-35.2 12.8-51.2 0l-3.2-3.2c-12.8-12.8-12.8-38.4 0-51.2l377.6-384L281.6 131.2c-12.8-12.8-12.8-38.4 0-51.2l3.2-3.2c16-16 38.4-16 51.2-3.2z"
-                p-id="2141"></path>
-            </svg>
-            <svg v-if="state.random != true" xmlns="http://www.w3.org/2000/svg" style="height: 3.2vh; width: 3.2vh"
-              fill="currentColor" class="bi bi-skip-end" viewBox="0 0 16 16">
-              <path
-                d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.713 3.31 4 3.655 4 4.308v7.384c0 .653.713.998 1.233.696L11.5 8.752V12a.5.5 0 0 0 1 0V4zM5 4.633 10.804 8 5 11.367V4.633z" />
-            </svg>
-          </a>
-
-
-        </div>
-        <div class="linkbox playerLeftLink heightWidthDisplay">
-          <a @click="loveMusic()">
-            <svg style="color:red;user-select:none;height: 2.8vh; width: 2.8vh"
-              v-if="(data.musicListInfor.myLove.aRtrackIds.indexOf(id) != -1)" xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-            </svg>
-            <svg v-if="(data.musicListInfor.myLove.aRtrackIds.indexOf(id) == -1)"
-              style="user-select:none;height: 2.8vh; width: 2.8vh" xmlns="http://www.w3.org/2000/svg" width="20"
-              height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-              <path
-                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-            </svg>
-
-
-          </a>
-          <a @click="nextMusicEventControl()">
-            <svg style="height: 3vh; width: 3vh" v-if="state.random == true" t="1657018045660" class="icon"
-              viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1704" width="1024"
-              height="1024">
-              <path
-                d="M844.8 665.6c-6.4-6.4-16-12.8-25.6-9.6-19.2 0-35.2 16-35.2 35.2 0 9.6 6.4 19.2 12.8 25.6l41.6 41.6c-44.8-6.4-86.4-22.4-121.6-51.2-3.2 0-3.2-3.2-6.4-6.4L332.8 304C268.8 233.6 192 195.2 99.2 195.2c-19.2 0-35.2 16-35.2 35.2s16 32 35.2 32c73.6 0 134.4 32 182.4 86.4l384 400 6.4 6.4c48 38.4 108.8 64 172.8 70.4l-48 44.8c-9.6 6.4-16 19.2-16 28.8 0 19.2 19.2 35.2 38.4 32 9.6 0 19.2-6.4 25.6-12.8l99.2-92.8c16-16 16-41.6 0-57.6l-99.2-102.4z m-3.2-556.8c-12.8-16-32-19.2-48-6.4-9.6 6.4-12.8 16-12.8 25.6 0 12.8 3.2 22.4 16 28.8l41.6 41.6c-73.6 9.6-140.8 38.4-192 89.6l-115.2 118.4c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 16 9.6 25.6 9.6s19.2-3.2 25.6-9.6l112-118.4c41.6-38.4 92.8-64 147.2-70.4l-44.8 44.8c-6.4 6.4-12.8 16-12.8 25.6 0 19.2 16 35.2 32 35.2 9.6 0 19.2-3.2 28.8-9.6L950.4 256c12.8-12.8 12.8-35.2 0-48l-108.8-99.2m-438.4 448c-9.6 0-19.2 3.2-25.6 9.6l-118.4 121.6c-48 44.8-96 67.2-160 67.2H96c-19.2 0-35.2 16-35.2 35.2s16 32 35.2 32h3.2c83.2 0 147.2-32 211.2-86.4l121.6-124.8c6.4-6.4 9.6-12.8 9.6-22.4 0-9.6-3.2-16-9.6-22.4-9.6-6.4-19.2-9.6-28.8-9.6z"
-                p-id="1705"></path>
-            </svg>
-            <svg style="height: 3vh; width: 3vh" v-if="audio.loop == true" t="1657018656868" class="icon"
-              viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1849" width="1024"
-              height="1024">
-              <path
-                d="M928 476.8c-19.2 0-32 12.8-32 32v86.4c0 108.8-86.4 198.4-198.4 198.4H201.6l41.6-38.4c6.4-6.4 12.8-16 12.8-25.6 0-19.2-16-35.2-35.2-35.2-9.6 0-22.4 3.2-28.8 9.6l-108.8 99.2c-16 12.8-12.8 35.2 0 48l108.8 96c6.4 6.4 19.2 12.8 28.8 12.8 19.2 0 35.2-12.8 38.4-32 0-12.8-6.4-22.4-16-28.8l-48-44.8h499.2c147.2 0 265.6-118.4 265.6-259.2v-86.4c0-19.2-12.8-32-32-32zM96 556.8c19.2 0 32-12.8 32-32v-89.6c0-112 89.6-201.6 198.4-204.8h496l-41.6 38.4c-6.4 6.4-12.8 16-12.8 25.6 0 19.2 16 35.2 35.2 35.2 9.6 0 22.4-3.2 28.8-9.6l105.6-99.2c16-12.8 12.8-35.2 0-48l-108.8-96c-6.4-6.4-19.2-12.8-28.8-12.8-19.2 0-35.2 12.8-38.4 32 0 12.8 6.4 22.4 16 28.8l48 44.8H329.6C182.4 169.6 64 288 64 438.4v86.4c0 19.2 12.8 32 32 32z"
-                p-id="1850"></path>
-              <path d="M544 672V352h-48L416 409.6l16 41.6 60.8-41.6V672z" p-id="1851"></path>
-            </svg>
-            <svg style="height: 3vh; width: 3vh" v-if="audio.loop == false && state.random == false" t="1657018716268"
-              class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1995"
-              width="1024" height="1024">
-              <path
-                d="M694.4 854.4H195.2l48 44.8c9.6 6.4 16 16 16 28.8-3.2 19.2-19.2 32-38.4 32-9.6 0-22.4-6.4-28.8-12.8l-108.8-96c-12.8-12.8-16-35.2 0-48L192 704c6.4-6.4 19.2-9.6 28.8-9.6 19.2 0 35.2 16 35.2 35.2 0 9.6-6.4 19.2-12.8 25.6l-41.6 38.4h496c112 0 198.4-89.6 198.4-198.4v-86.4c0-19.2 12.8-32 32-32s32 12.8 32 32v86.4c0 140.8-118.4 259.2-265.6 259.2zM329.6 169.6h496l-48-44.8c-9.6-6.4-16-16-16-28.8 3.2-19.2 19.2-32 38.4-32 9.6 0 22.4 6.4 28.8 12.8l108.8 96c12.8 12.8 16 35.2 0 48L832 320c-6.4 6.4-19.2 9.6-28.8 9.6-19.2 0-35.2-16-35.2-35.2 0-9.6 6.4-19.2 12.8-25.6l41.6-38.4H326.4C217.6 233.6 128 323.2 128 435.2v89.6c0 19.2-12.8 32-32 32s-32-12.8-32-32v-86.4C64 288 182.4 169.6 329.6 169.6z"
-                p-id="1996"></path>
-            </svg>
-          </a>
-          <!--musicPanel-->
-          <a @click="tapElm.musicPanel.display">
-            <svg style="height: 3vh; width: 3vh" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-              fill="currentColor" class="bi bi-sliders" viewBox="0 0 16 16">
-              <path fill-rule="evenodd"
-                d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z" />
-            </svg>
-          </a>
-
-
-        </div>
-        <!--
-        手机版按键
-      -->
-        <div class="lowWidthDisplay playerButton">
-          <div style="height: 54px;" class="buttonline">
-            <a @click="loveMusic()">
-              <svg style="height: 2.3vh;aspect-ratio: 1/1;color:red;user-select:none"
-                v-if="(data.musicListInfor.myLove.aRtrackIds.indexOf(id) != -1)" xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-              </svg>
-              <svg v-if="(data.musicListInfor.myLove.aRtrackIds.indexOf(id) == -1)"
-                style="height: 2.3vh;aspect-ratio: 1/1;user-select:none;" xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                <path
-                  d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-              </svg>
-
-
-            </a>
-            <!--上一曲-->
-            <a v-if="state.random != true && data.musicListInfor.personalFM.use == false" @click="upMusic()">
-              <svg xmlns="http://www.w3.org/2000/svg" style="height: 3.8vh;aspect-ratio: 1/1" fill="currentColor"
-                class="bi bi-skip-start" viewBox="0 0 16 16">
-                <path
-                  d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L5 8.752V12a.5.5 0 0 1-1 0V4zm7.5.633L5.696 8l5.804 3.367V4.633z" />
-                =</svg>
-            </a>
-            <!--私人-不喜欢-->
-            <a @click="notLovePerFm()" v-if="data.musicListInfor.personalFM.use == true"
-              class="minWidthUnneed player-Mini-Contorl-normal">
-              <svg xmlns="http://www.w3.org/2000/svg" style="height: 3.8vh;aspect-ratio: 1/1" fill="currentColor"
-                class="bi bi-trash" viewBox="0 0 16 16">
-                <path
-                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                <path fill-rule="evenodd"
-                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-              </svg>
-            </a>
-
-            <!--播放键-->
-            <a style="color: black;height: inherit;;aspect-ratio: 1/1" @click="plays()">
-              <svg v-if="( state.playing == false && audio.readyState >= 2)" xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
-                <path
-                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
-              </svg>
-              <svg v-if="( state.playing == true && audio.readyState >= 2)" xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor" class="bi bi-pause-circle-fill" viewBox="0 0 16 16">
-                <path
-                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.25 5C5.56 5 5 5.56 5 6.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C7.5 5.56 6.94 5 6.25 5zm3.5 0c-.69 0-1.25.56-1.25 1.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C11 5.56 10.44 5 9.75 5z" />
-              </svg>
-              <svg v-if="( audio.readyState < 2 )" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
-                <path
-                  d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
-              </svg>
-            </a>
-            <!--下一曲/随机-->
-            <a @click="nextMusic()">
-              <svg style="height: 3.8vh;aspect-ratio: 1/1" v-if="state.random == true" t="1657019671848" class="icon"
-                viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M336 73.6l406.4 412.8c12.8 12.8 12.8 38.4 0 51.2L336 950.4c-12.8 12.8-35.2 12.8-51.2 0l-3.2-3.2c-12.8-12.8-12.8-38.4 0-51.2l377.6-384L281.6 131.2c-12.8-12.8-12.8-38.4 0-51.2l3.2-3.2c16-16 38.4-16 51.2-3.2z"
-                  p-id="2141"></path>
-              </svg>
-              <svg v-if="state.random != true" xmlns="http://www.w3.org/2000/svg"
-                style="height: 3.8vh;aspect-ratio: 1/1" fill="currentColor" class="bi bi-skip-end" viewBox="0 0 16 16">
-                <path
-                  d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.713 3.31 4 3.655 4 4.308v7.384c0 .653.713.998 1.233.696L11.5 8.752V12a.5.5 0 0 0 1 0V4zM5 4.633 10.804 8 5 11.367V4.633z" />
-              </svg>
-            </a>
-
-            <!--调整音乐播放方法-->
-            <a style="color: black;height: fit-content;aspect-ratio: 1/1" @click="nextMusicEventControl()">
-              <svg style="height: 2.5vh; width: 2.5vh" v-if="state.random == true" t="1657018045660" class="icon"
-                viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1704" width="1024"
-                height="1024">
-                <path
-                  d="M844.8 665.6c-6.4-6.4-16-12.8-25.6-9.6-19.2 0-35.2 16-35.2 35.2 0 9.6 6.4 19.2 12.8 25.6l41.6 41.6c-44.8-6.4-86.4-22.4-121.6-51.2-3.2 0-3.2-3.2-6.4-6.4L332.8 304C268.8 233.6 192 195.2 99.2 195.2c-19.2 0-35.2 16-35.2 35.2s16 32 35.2 32c73.6 0 134.4 32 182.4 86.4l384 400 6.4 6.4c48 38.4 108.8 64 172.8 70.4l-48 44.8c-9.6 6.4-16 19.2-16 28.8 0 19.2 19.2 35.2 38.4 32 9.6 0 19.2-6.4 25.6-12.8l99.2-92.8c16-16 16-41.6 0-57.6l-99.2-102.4z m-3.2-556.8c-12.8-16-32-19.2-48-6.4-9.6 6.4-12.8 16-12.8 25.6 0 12.8 3.2 22.4 16 28.8l41.6 41.6c-73.6 9.6-140.8 38.4-192 89.6l-115.2 118.4c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 16 9.6 25.6 9.6s19.2-3.2 25.6-9.6l112-118.4c41.6-38.4 92.8-64 147.2-70.4l-44.8 44.8c-6.4 6.4-12.8 16-12.8 25.6 0 19.2 16 35.2 32 35.2 9.6 0 19.2-3.2 28.8-9.6L950.4 256c12.8-12.8 12.8-35.2 0-48l-108.8-99.2m-438.4 448c-9.6 0-19.2 3.2-25.6 9.6l-118.4 121.6c-48 44.8-96 67.2-160 67.2H96c-19.2 0-35.2 16-35.2 35.2s16 32 35.2 32h3.2c83.2 0 147.2-32 211.2-86.4l121.6-124.8c6.4-6.4 9.6-12.8 9.6-22.4 0-9.6-3.2-16-9.6-22.4-9.6-6.4-19.2-9.6-28.8-9.6z"
-                  p-id="1705"></path>
-              </svg>
-              <svg style="height: 2.5vh; width: 2.5vh" v-if="audio.loop == true" t="1657018656868" class="icon"
-                viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1849" width="1024"
-                height="1024">
-                <path
-                  d="M928 476.8c-19.2 0-32 12.8-32 32v86.4c0 108.8-86.4 198.4-198.4 198.4H201.6l41.6-38.4c6.4-6.4 12.8-16 12.8-25.6 0-19.2-16-35.2-35.2-35.2-9.6 0-22.4 3.2-28.8 9.6l-108.8 99.2c-16 12.8-12.8 35.2 0 48l108.8 96c6.4 6.4 19.2 12.8 28.8 12.8 19.2 0 35.2-12.8 38.4-32 0-12.8-6.4-22.4-16-28.8l-48-44.8h499.2c147.2 0 265.6-118.4 265.6-259.2v-86.4c0-19.2-12.8-32-32-32zM96 556.8c19.2 0 32-12.8 32-32v-89.6c0-112 89.6-201.6 198.4-204.8h496l-41.6 38.4c-6.4 6.4-12.8 16-12.8 25.6 0 19.2 16 35.2 35.2 35.2 9.6 0 22.4-3.2 28.8-9.6l105.6-99.2c16-12.8 12.8-35.2 0-48l-108.8-96c-6.4-6.4-19.2-12.8-28.8-12.8-19.2 0-35.2 12.8-38.4 32 0 12.8 6.4 22.4 16 28.8l48 44.8H329.6C182.4 169.6 64 288 64 438.4v86.4c0 19.2 12.8 32 32 32z"
-                  p-id="1850"></path>
-                <path d="M544 672V352h-48L416 409.6l16 41.6 60.8-41.6V672z" p-id="1851"></path>
-              </svg>
-              <svg style="height: 2.5vh; width: 2.5vh" v-if="audio.loop == false && state.random == false"
-                t="1657018716268" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                p-id="1995" width="1024" height="1024">
-                <path
-                  d="M694.4 854.4H195.2l48 44.8c9.6 6.4 16 16 16 28.8-3.2 19.2-19.2 32-38.4 32-9.6 0-22.4-6.4-28.8-12.8l-108.8-96c-12.8-12.8-16-35.2 0-48L192 704c6.4-6.4 19.2-9.6 28.8-9.6 19.2 0 35.2 16 35.2 35.2 0 9.6-6.4 19.2-12.8 25.6l-41.6 38.4h496c112 0 198.4-89.6 198.4-198.4v-86.4c0-19.2 12.8-32 32-32s32 12.8 32 32v86.4c0 140.8-118.4 259.2-265.6 259.2zM329.6 169.6h496l-48-44.8c-9.6-6.4-16-16-16-28.8 3.2-19.2 19.2-32 38.4-32 9.6 0 22.4 6.4 28.8 12.8l108.8 96c12.8 12.8 16 35.2 0 48L832 320c-6.4 6.4-19.2 9.6-28.8 9.6-19.2 0-35.2-16-35.2-35.2 0-9.6 6.4-19.2 12.8-25.6l41.6-38.4H326.4C217.6 233.6 128 323.2 128 435.2v89.6c0 19.2-12.8 32-32 32s-32-12.8-32-32v-86.4C64 288 182.4 169.6 329.6 169.6z"
-                  p-id="1996"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div  class="right-side playerIndexSide">
-<!-- {{ (this.data.player.musicCache[this.id] != undefined&&this.data.player.musicCache[this.id].color)?this.data.player.musicCache[this.id].color.background[0].color:'#0008' }} -->
-        <div id="lyric">
-          <ul id="lyrics" :style="'--dur:'+configContent.config.lyricSet.dur +  'ms'" ref="lyricBox"
-            v-if="data.player.musicCache[id] && this.data.player.musicCache[id].lyric.yrc == false">
-            <li @click="audio.currentTime = item.t" v-for="(item,i) in this.data.player.musicCache[id].lyric.ms"
-              v-bind:key="item.t">
-              <h1>{{item.c}}</h1>
-              <h2 v-if="(state.lyricUse !=false&&item[state.lyricUse+'C'] != undefined)">{{item[state.lyricUse+'C']}}</h2>
-              <!-- <div>{{formTime(parseInt(item.t))}}</div> -->
-            </li>
-          </ul>
-
-          <ul id="lyrics" ref="lyricBox"
-            :style="{
-              '--dur': configContent.config.lyricSet.dur +  'ms'
-            }"
-            v-if="data.player.musicCache[id] && this.data.player.musicCache[id].lyric.yrc != false">
-            <li v-bind:lyricFocus="
-              item.playing
-            " @click="audio.currentTime = item.t - 0.3" v-for="(item,i) in this.data.player.musicCache[id].lyric.yrc"
-              v-bind:key="item.t" v-bind:lyricNum="i">
-              <h1 class="yrc"
-                :style="
-                  {
-                    '--progress': item.progressleft,
-                    '--background-transition-linear-gradient-progress-width': 'calc(' + item.transfromWidth + ' + 0.25em)'
-                  }
-                "
-              v-if="item.playing == true">
-                <!--聚焦时-->
-                <a :class="[
-                  (item.index == num)?'foucusText':'',
-                  yrc.shine
-                ]"
-                  :style="{ '--dur': yrc.dur +'s'}"
-                v-for="(yrc,num) in item.c">
-                
-                {{ yrc.str }}
-              </a>
-            </h1>
-             <h1 v-if="item.playing == false">
-                <!--聚焦时 -->
-                <!--聚焦时-->
-
-                
-                {{ item.strC }}
-            
-            </h1>
-            <h2>
-              {{item.ytlrcC}}
-            </h2>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
   <div id="messageLab">
   </div>
 
@@ -698,8 +214,8 @@
           <div
             v-bind:style="'background:'+((state.lyricUse != false)?'var(--color-theme-alpha);color:#00000040':'#00000010')"
             @click="state.lyricUse = (state.lyricUse == false)?'tran':((state.lyricUse == 'tran')?'roma':false);">
-            <svg v-if="state.lyricUse != 'roma'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-translate"
-              viewBox="0 0 16 16">
+            <svg v-if="state.lyricUse != 'roma'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              fill="currentColor" class="bi bi-translate" viewBox="0 0 16 16">
               <path
                 d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z" />
               <path
@@ -728,11 +244,11 @@
   import reTools from './network/getData'
   import config from './js/config.js'
 
-  let configRefresh =  (config)=>{
-      configContent = config
-    }
-  var configContent = config.setting('keepListenning',configRefresh);
-    
+  let configRefresh = (config) => {
+    configContent = config
+  }
+  var configContent = config.setting('keepListenning', configRefresh);
+
 
   import analyze from 'rgbaster'
   import Color from 'color';
@@ -744,13 +260,13 @@
   import playerElmContorl from './js/playerElm.js'
   import main from './main.js'
   import tapElm from './js/tapElm.js'
-  import  viewBoxScroll from './js/viewBoxScroll.js'
+  import viewBoxScroll from './js/viewBoxScroll.js'
   import login_components from './components/login.vue'
   import './windowControlBar.css'
   async function picColor(url) {
-      return await analyze(url + '?param=24y24', {
-          ignore: ['rgb(255,255,255)', 'rgb(0,0,0)']
-      })
+    return await analyze(url + '?param=24y24', {
+      ignore: ['rgb(255,255,255)', 'rgb(0,0,0)']
+    })
   }
 
   import './style.css'
@@ -758,8 +274,12 @@
   import './naturalUI.css'
   import './message.css'
   import background from './components/background.vue'
-import { transform } from '@vue/compiler-core'
-import { nextTick } from 'vue';
+  import {
+    transform
+  } from '@vue/compiler-core'
+  import {
+    nextTick
+  } from 'vue';
 
   import musicInfoPage from './components/musicInfoPage.vue';
   var bodyHeight, bodyWidth,
@@ -767,6 +287,7 @@ import { nextTick } from 'vue';
     usingLowWidhtMedi, lastTime = 0
   window.addEventListener('resize', getWindowInfo)
   let lastResizeTime = undefined
+
   function getWindowInfo() {
     let CachebodyHeight = document.documentElement.clientHeight
     let CachebodyWidth = document.documentElement.clientWidth
@@ -803,7 +324,7 @@ import { nextTick } from 'vue';
     }
   }
   var vueApp = {
-    components:{
+    components: {
       background,
       login_components,
       musicInfoPage
@@ -847,7 +368,7 @@ import { nextTick } from 'vue';
               mainDisplay: 'buttom',
               duration: 0,
               realCurrTime: 0,
-              nowLine:[],
+              nowLine: [],
               currTime: 0,
               maxProgressWidth: '0px',
               progress: 0,
@@ -907,20 +428,22 @@ import { nextTick } from 'vue';
           },
         },
         tapElm,
-        audioNetease,bodyHeight, bodyWidth
+        audioNetease,
+        bodyHeight,
+        bodyWidth
       }
     },
 
     created() {
-      if('mediaSession' in navigator && "setActionHandler" in navigator.mediaSession){
-        navigator.mediaSession.setActionHandler('nexttrack',this.nextMusic)
-        navigator.mediaSession.setActionHandler('previoustrack',this.upMusic)
-        
-        navigator.mediaSession.setActionHandler("seekbackward", (details) => {
-        const skipTime = details.seekOffset || 10;
+      if ('mediaSession' in navigator && "setActionHandler" in navigator.mediaSession) {
+        navigator.mediaSession.setActionHandler('nexttrack', this.nextMusic)
+        navigator.mediaSession.setActionHandler('previoustrack', this.upMusic)
 
-        this.audio.currentTime = Math.max(this.audio.currentTime - skipTime, 0);
-      });
+        navigator.mediaSession.setActionHandler("seekbackward", (details) => {
+          const skipTime = details.seekOffset || 10;
+
+          this.audio.currentTime = Math.max(this.audio.currentTime - skipTime, 0);
+        });
       }
       audioNetease.requirePersonalFM().then(r => {
         this.data.musicListInfor.personalFM.tracks = r
@@ -966,16 +489,18 @@ import { nextTick } from 'vue';
             let song = this.data.player.tracks[this.data.player.trackNum]
             let name = ''
             for (let num in song.ar) {
-                name += song.ar[num].name;
-                if (song.ar.length - num > 1) {
-                    name += ' & '
-                }
+              name += song.ar[num].name;
+              if (song.ar.length - num > 1) {
+                name += ' & '
+              }
             }
             navigator.mediaSession.metadata = new MediaMetadata({
               title: song.name,
               artist: name,
               album: song.al.name,
-              artwork: [{ src: song.al.picUrl }],
+              artwork: [{
+                src: song.al.picUrl
+              }],
             });
 
 
@@ -1044,8 +569,8 @@ import { nextTick } from 'vue';
                 // color
               }
               setTimeout(() => {
-                this.data.player.musicCache[thisMusic.id]==undefined
-              }, 10 * 60 *60 *1000);
+                this.data.player.musicCache[thisMusic.id] == undefined
+              }, 10 * 60 * 60 * 1000);
 
             }
           }
@@ -1060,17 +585,18 @@ import { nextTick } from 'vue';
       }
     },
     methods: {
-      handleScroll(e){
-        let date  = new Date().getTime()
-        localStorage.setItem('handleScrollDelay',date)
+      handleScroll(e) {
+        let date = new Date().getTime()
+        localStorage.setItem('handleScrollDelay', date)
 
         setTimeout(() => {
-          if (localStorage.getItem('handleScrollDelay') == date){
+          if (localStorage.getItem('handleScrollDelay') == date) {
             this.state.scrollTop = e.srcElement.scrollTop
-        this.state.scrollPercent =  e.srcElement.scrollTop / ( e.srcElement.scrollHeight - e.srcElement.offsetHeight )
-        this.state.scrollDisplayOffsetTop = this.state.scrollTop + (e.srcElement.offsetHeight || bodyHeight)
-        // console.log(this.state.scrollDisplayOffsetTop);
-        this.state.scrollHeight=e.srcElement.offsetHeight||bodyHeight
+            this.state.scrollPercent = e.srcElement.scrollTop / (e.srcElement.scrollHeight - e.srcElement
+              .offsetHeight)
+            this.state.scrollDisplayOffsetTop = this.state.scrollTop + (e.srcElement.offsetHeight || bodyHeight)
+            // console.log(this.state.scrollDisplayOffsetTop);
+            this.state.scrollHeight = e.srcElement.offsetHeight || bodyHeight
           }
         }, 90);
       },
@@ -1088,12 +614,11 @@ import { nextTick } from 'vue';
         }
         return this.cache[link]
       },
-      blurLyricElectronWindowControl(message){
-        if('electronAPI' in window && window.electronAPI[message]){
+      blurLyricElectronWindowControl(message) {
+        if ('electronAPI' in window && window.electronAPI[message]) {
           window.electronAPI[message]()
         }
-      }
-      ,
+      },
       usePersonalFM() {
         this.getCurr()
         progress.load(this.audio)
@@ -1104,7 +629,6 @@ import { nextTick } from 'vue';
         this.refusePersonalFM()
         this.id = personalFMData.tracks[personalFMData.trackNum].id
         this.plays()
-        document.getElementById('player').style.top = 'calc(100% - var(--minplayerHeight) - 18px)'
       },
       getPersonalFM() {
         this.data.musicListInfor.personalFM.use = true
@@ -1168,9 +692,7 @@ import { nextTick } from 'vue';
               this.data.recommendSongs = r
             })
           }
-          playerElmContorl.load()
-          tapElm.create(document.querySelector('#musicPanel>.tap'), document.querySelector('#musicPanel'),
-            () => {})
+
 
           document.querySelector('#LoadingText').innerHTML = ""
           let 渐变消失LOGO界面 = anime({
@@ -1204,114 +726,116 @@ import { nextTick } from 'vue';
         let min = Math.floor(sec / 60) < 10 ? ('0' + Math.floor(sec / 60)) : Math.floor(sec / 60)
         return min + ':' + s
       },
-        lyricFoundLine(info,time){
-          // console.log(info,time);
-          let now = 0
-          for (let i = info.lyricNum ; i <= info.yrc.length; i++) {
-             if(info.yrc[i]&&info.yrc[i].t > time + 0.2){
-              this.data.player.musicCache[this.id].lyric.yrc[i].index = 0
-              this.data.player.musicCache[this.id].lyric.yrc[i].playing=false
-               break
-             }
-            if(info.yrc[i]&&info.yrc[i].t <= time + 0.2){
-              this.data.player.musicCache[this.id].lyric.yrc[i].playing=true
-              if(this.data.player.musicCache[this.id].lyric.yrc[i].width == undefined){
-                // let thisLineElement = this.$refs.lyricBox.querySelector('li[lyricNum='+i+'] h1')
-                // thisLine
-              }
-              this.lyricFoundStr(info.yrc[i].c,time,i)
+      lyricFoundLine(info, time) {
+        // console.log(info,time);
+        let now = 0
+        for (let i = info.lyricNum; i <= info.yrc.length; i++) {
+          if (info.yrc[i] && info.yrc[i].t > time + 0.2) {
+            this.data.player.musicCache[this.id].lyric.yrc[i].index = 0
+            this.data.player.musicCache[this.id].lyric.yrc[i].playing = false
+            break
+          }
+          if (info.yrc[i] && info.yrc[i].t <= time + 0.2) {
+            this.data.player.musicCache[this.id].lyric.yrc[i].playing = true
+            if (this.data.player.musicCache[this.id].lyric.yrc[i].width == undefined) {
+              // let thisLineElement = this.$refs.lyricBox.querySelector('li[lyricNum='+i+'] h1')
+              // thisLine
             }
-            // now = info.lyricNum - i
+            this.lyricFoundStr(info.yrc[i].c, time, i)
           }
-          // console.log(now);
-
-        },
-
-        lyricFoundStr(info,time,i){
-          const thisYrcLine = this.data.player.musicCache[this.id].lyric.yrc[i]
-          let strNowIndex = thisYrcLine.index
-          // if(info[thisYrcLine.index].t > time+0.35){
-          //   strNowIndex = thisYrcLine.index
-          // } else {
-
-          // }
-            let _state = false //如果当前Index不得到正常取值，则执行寻找当前行
-          let makeProgress = ()=>{
-            if(thisYrcLine){
-              let nowStr = thisYrcLine.c[strNowIndex]
-              
-              let progress = (((time - nowStr.t + 0.2) / nowStr.dur) * 100)
-              if(progress>=100){
-                _state = (progress>100)?true:false
-                progress = 100
-              }
-              if(progress<0){
-                progress=0
-                _state = true
-              }
-              if(nowStr.width == undefined && strNowIndex != -1){
-                let tempStrIndex = thisYrcLine.c.findIndex((v)=>{
-                  return v.width ==undefined
-                })
-                if(thisYrcLine.lastResizeTime == undefined) {thisYrcLine.lastResizeTime= new Date()}
-                if(tempStrIndex == -1&&(thisYrcLine.lastResizeTime < lastResizeTime)) {
-                  tempStrIndex = 0
-                  thisYrcLine.lastResizeTime= new Date()
-                }
-
-                for(;tempStrIndex <= strNowIndex;tempStrIndex++){
-                      
-
-                  let thisStrElement = this.$refs.lyricBox.querySelector('#lyric li:nth-child('+(i+1)+') a:nth-child('+(tempStrIndex + 1)+')')
-                  if(!thisStrElement) return
-                  thisYrcLine.c[tempStrIndex].width = thisStrElement.offsetWidth
-                  thisYrcLine.c[tempStrIndex].left = (tempStrIndex == 0)?0:
-                  (thisYrcLine.c[tempStrIndex-1].left + thisYrcLine.c[tempStrIndex-1].width)
-                }
-
-              }
-
-              let currProgressLeft = ((progress * nowStr.width * 0.01) + nowStr.left)
-              anime({
-                targets: thisYrcLine,
-                progressleft: currProgressLeft + 'px',
-                easing: 'linear',
-                duration: 60,
-                transfromWidth:()=>{
-                  return (nowStr.width / nowStr.dur * 0.06) + 'px'
-                }
-              })
-
-              return progress
-            }
-          }
-
-          let findStrNowIndex = ()=>{
-            strNowIndex = info.findIndex((v,index,obj)=>{
-              if(v.t > time + 0.2){
-                return true
-              } else {
-                return false
-              }
-            }) - 1
-            if(strNowIndex == -2) {
-              strNowIndex = info.length - 1
-            }
-
-            thisYrcLine.index = strNowIndex
-
-
-          }
-          let _tempProgress = makeProgress()
-          if(_state==true){
-            findStrNowIndex()
-            makeProgress()
-          }
-          // console.log(strNowIndex);
-
-          
+          // now = info.lyricNum - i
         }
-      ,
+        // console.log(now);
+
+      },
+
+      lyricFoundStr(info, time, i) {
+        const thisYrcLine = this.data.player.musicCache[this.id].lyric.yrc[i]
+        let strNowIndex = thisYrcLine.index
+        // if(info[thisYrcLine.index].t > time+0.35){
+        //   strNowIndex = thisYrcLine.index
+        // } else {
+
+        // }
+        let _state = false //如果当前Index不得到正常取值，则执行寻找当前行
+        let makeProgress = () => {
+          if (thisYrcLine) {
+            let nowStr = thisYrcLine.c[strNowIndex]
+
+            let progress = (((time - nowStr.t + 0.2) / nowStr.dur) * 100)
+            if (progress >= 100) {
+              _state = (progress > 100) ? true : false
+              progress = 100
+            }
+            if (progress < 0) {
+              progress = 0
+              _state = true
+            }
+            if (nowStr.width == undefined && strNowIndex != -1) {
+              let tempStrIndex = thisYrcLine.c.findIndex((v) => {
+                return v.width == undefined
+              })
+              if (thisYrcLine.lastResizeTime == undefined) {
+                thisYrcLine.lastResizeTime = new Date()
+              }
+              if (tempStrIndex == -1 && (thisYrcLine.lastResizeTime < lastResizeTime)) {
+                tempStrIndex = 0
+                thisYrcLine.lastResizeTime = new Date()
+              }
+
+              for (; tempStrIndex <= strNowIndex; tempStrIndex++) {
+
+
+                let thisStrElement = this.$refs.lyricBox.querySelector('#lyric li:nth-child(' + (i + 1) +
+                  ') a:nth-child(' + (tempStrIndex + 1) + ')')
+                if (!thisStrElement) return
+                thisYrcLine.c[tempStrIndex].width = thisStrElement.offsetWidth
+                thisYrcLine.c[tempStrIndex].left = (tempStrIndex == 0) ? 0 :
+                  (thisYrcLine.c[tempStrIndex - 1].left + thisYrcLine.c[tempStrIndex - 1].width)
+              }
+
+            }
+
+            let currProgressLeft = ((progress * nowStr.width * 0.01) + nowStr.left)
+            anime({
+              targets: thisYrcLine,
+              progressleft: currProgressLeft + 'px',
+              easing: 'linear',
+              duration: 60,
+              transfromWidth: () => {
+                return (nowStr.width / nowStr.dur * 0.06) + 'px'
+              }
+            })
+
+            return progress
+          }
+        }
+
+        let findStrNowIndex = () => {
+          strNowIndex = info.findIndex((v, index, obj) => {
+            if (v.t > time + 0.2) {
+              return true
+            } else {
+              return false
+            }
+          }) - 1
+          if (strNowIndex == -2) {
+            strNowIndex = info.length - 1
+          }
+
+          thisYrcLine.index = strNowIndex
+
+
+        }
+        let _tempProgress = makeProgress()
+        if (_state == true) {
+          findStrNowIndex()
+          makeProgress()
+        }
+        // console.log(strNowIndex);
+
+
+      },
       async lyricSet(force, type) {
 
         if (this.$refs.lyricBox && this.state.playing ==
@@ -1322,36 +846,40 @@ import { nextTick } from 'vue';
             //找到歌词的行数
             lyricNum = undefined
 
-            if (this.data.player.musicCache[this.id].lyric.yrc != false && this.data.player.musicCache[this.id].lyric.yrc != undefined) {
-          lyricNum = this.data.player.musicCache[this.id].lyric.yrc.findIndex((obj, i) => {
-            let lastWord = obj.c[obj.c.length - 1];
-            let result = ((
-                (lastWord.t + lastWord.dur) >= currTime + 0.1) //要求已过了上一句歌词末尾
-              &&
-              ((this.data.player.musicCache[this.id].lyric.yrc[i] != undefined) && (this.data.player.musicCache[this.id].lyric.yrc[i].t >= (currTime + 0.2)))) 
-            this.data.player.musicCache[this.id].lyric.yrc[i].playing == false
+          if (this.data.player.musicCache[this.id].lyric.yrc != false && this.data.player.musicCache[this.id].lyric
+            .yrc != undefined) {
+            lyricNum = this.data.player.musicCache[this.id].lyric.yrc.findIndex((obj, i) => {
+              let lastWord = obj.c[obj.c.length - 1];
+              let result = ((
+                  (lastWord.t + lastWord.dur) >= currTime + 0.1) //要求已过了上一句歌词末尾
+                &&
+                ((this.data.player.musicCache[this.id].lyric.yrc[i] != undefined) && (this.data.player
+                  .musicCache[this.id].lyric.yrc[i].t >= (currTime + 0.2))))
+              this.data.player.musicCache[this.id].lyric.yrc[i].playing == false
 
-            
-            if(this.data.player.musicCache[this.id].lyric.yrc[i+1]){
-              this.data.player.musicCache[this.id].lyric.yrc[i+1].playing == false
-            }
 
-            return result
-          }) - 1
+              if (this.data.player.musicCache[this.id].lyric.yrc[i + 1]) {
+                this.data.player.musicCache[this.id].lyric.yrc[i + 1].playing == false
+              }
 
-          if (lyricNum == -1) lyricNum == this.data.player.musicCache[this.id].lyric.length - 1
-          this.lyricFoundLine({
-            yrc: this.data.player.musicCache[this.id].lyric.yrc,
-            lyricNum: lyricNum
-          }, currTime)
-          if (lis.length > 0 && lyricNum == -2) lyricNum = this.data.player.musicCache[this.id].lyric.yrc.length - 1
+              return result
+            }) - 1
 
-        } else {
-          lyricNum = this.data.player.musicCache[this.id].lyric.ms.findIndex(obj => obj.t >= (currTime + 0.6)) - 1
-          if (lis.length > 0 && lyricNum == -2) lyricNum = this.data.player.musicCache[this.id].lyric.ms.length - 1
-        }
+            if (lyricNum == -1) lyricNum == this.data.player.musicCache[this.id].lyric.length - 1
+            this.lyricFoundLine({
+              yrc: this.data.player.musicCache[this.id].lyric.yrc,
+              lyricNum: lyricNum
+            }, currTime)
+            if (lis.length > 0 && lyricNum == -2) lyricNum = this.data.player.musicCache[this.id].lyric.yrc.length -
+              1
+
+          } else {
+            lyricNum = this.data.player.musicCache[this.id].lyric.ms.findIndex(obj => obj.t >= (currTime + 0.6)) - 1
+            if (lis.length > 0 && lyricNum == -2) lyricNum = this.data.player.musicCache[this.id].lyric.ms.length -
+              1
+          }
           //对于
-          
+
           /**
            * 条件：（当歌词行数变化 或 被强制执行）同时要满足 歌词存在时再执行
            */
@@ -1379,7 +907,7 @@ import { nextTick } from 'vue';
                   return true
                 }
               }
-                var translateY = - lis[lyricNum].offsetTop+ (0.15 *  bodyHeight),
+              var translateY = -lis[lyricNum].offsetTop + (0.15 * bodyHeight),
                 translateYContent = "translateY(" + translateY + "px)"
               let dur
               if (force == true && type != 'tran') {
@@ -1390,7 +918,7 @@ import { nextTick } from 'vue';
 
 
 
-              let needRendereds =[]
+              let needRendereds = []
               //对元素赋值
               for (let i = 0; i < lis.length; i++) {
                 let element = lis[i]
@@ -1399,46 +927,46 @@ import { nextTick } from 'vue';
                 if (needFocus == true) {
                   needRendereds.push(element)
 
-                  element.setAttribute('displaying',true)
+                  element.setAttribute('displaying', true)
                   if (i == lyricNum) {
                     element.setAttribute('lyricFocus', true)
                   } else {
                     element.setAttribute('lyricFocus', false)
                   }
                 } else {
-                  element.setAttribute('displaying',false)
+                  element.setAttribute('displaying', false)
                   element.style.setProperty('transform', translateYContent)
                 }
               }
-              let nowRendingLyric = (lyricNum <= 3)?lyricNum:3;
+              let nowRendingLyric = (lyricNum <= 3) ? lyricNum : 3;
               anime({
                 targets: needRendereds,
-                translateY: translateY  + 'px',
+                translateY: translateY + 'px',
                 duration: dur,
                 scale: {
-                  value:(el,i)=> {
-                    return (i == (nowRendingLyric))?1:'0.9'
+                  value: (el, i) => {
+                    return (i == (nowRendingLyric)) ? 1 : '0.9'
                   },
-                  easing:'cubicBezier(.3, .5, .2, 1)',
+                  easing: 'cubicBezier(.3, .5, .2, 1)',
                   duration: 600
                 },
                 color: {
-                  value:(el,i)=> {
-                    return (i == (nowRendingLyric))?'rgb(0,0,0,0.6)':'rgb(0,0,0,0.12)'
+                  value: (el, i) => {
+                    return (i == (nowRendingLyric)) ? 'rgb(0,0,0,0.6)' : 'rgb(0,0,0,0.12)'
                   },
-                  easing:'cubicBezier(.3, .5, .2, 1)',
+                  easing: 'cubicBezier(.3, .5, .2, 1)',
                   duration: 600
                 },
-                delay: (el,i)=> (force == true||configContent.config.lyricSet
-                      .funcDelay==false)?'0':config
-                      .settingTemperture.lyricSet.funcDelay[configContent.config.lyricSet
-                        .funcDelay](i - nowRendingLyric),
-                filter:(el,i)=>config.settingTemperture.lyricSet.funcBlur[configContent.config
-                      .lyricSet
-                      .funcBlur](i - nowRendingLyric),
+                delay: (el, i) => (force == true || configContent.config.lyricSet
+                    .funcDelay == false) ? '0' : config
+                  .settingTemperture.lyricSet.funcDelay[configContent.config.lyricSet
+                    .funcDelay](i - nowRendingLyric),
+                filter: (el, i) => config.settingTemperture.lyricSet.funcBlur[configContent.config
+                  .lyricSet
+                  .funcBlur](i - nowRendingLyric),
                 easing: (configContent.config.lyricSet
 
-                      .funcDelay==false)?'cubicBezier(.3, .5, .2, 1)':'spring(1.3, 90, 15, 0)'
+                  .funcDelay == false) ? 'cubicBezier(.3, .5, .2, 1)' : 'spring(1.3, 90, 15, 0)'
 
               })
 
@@ -1450,47 +978,48 @@ import { nextTick } from 'vue';
       },
       async getCurr() {
         //音频进度转换
-        if(this.cache.loadFuncGetCurr == false){
-          this.cache.loadFuncGetCurr=true        
+        if (this.cache.loadFuncGetCurr == false) {
+          this.cache.loadFuncGetCurr = true
         } else {
           return
         }
 
-          let  lyricSide = document.querySelector('.right-side')
 
-        let reqMediaSession = (navigator['mediaSession'] != undefined && navigator.mediaSession['setPositionState'] != undefined)
-        let calculateTime = async ()=>{
+        let reqMediaSession = (navigator['mediaSession'] != undefined && navigator.mediaSession[
+          'setPositionState'] != undefined)
+        let calculateTime = async () => {
           const uiDisplay = this.data.player.uiDisplay
           const cur = this.audio.currentTime
 
           let parseCurrTime = parseInt(cur);
-         uiDisplay.realCurrTime = cur
-         uiDisplay.currTime = parseCurrTime;
-         let progress = parseCurrTime /  uiDisplay.duration
+          uiDisplay.realCurrTime = cur
+          uiDisplay.currTime = parseCurrTime;
 
 
-          if (!transitionning) {  uiDisplay.progress = progress}
-        // if('mediaSession' in navigator && 'setPositionState' in navigator.mediaSession){
-          if( reqMediaSession && progress <= 1 ){
+          // if('mediaSession' in navigator && 'setPositionState' in navigator.mediaSession){
+          if (reqMediaSession && progress <= 1) {
             let duration = uiDisplay.duration
-            if(isNaN(duration)){
+            if (isNaN(duration)) {
               duration = 0 //duration 无效,设置为默认值
-            }  
-              navigator.mediaSession.setPositionState({
-                duration:duration,
-                playbackRate: this.audio.playbackRate,
-                position:cur
-              })
             }
+            navigator.mediaSession.setPositionState({
+              duration: duration,
+              playbackRate: this.audio.playbackRate,
+              position: cur
+            })
+          }
           //音频过度事件触发
-          let transitionTime = (configContent.config.useTransitionNextMusic == true )?6:1
-          if ((( uiDisplay.duration - cur) <= transitionTime) && (progress != NaN) && (this.audio.readyState >=2) && (this
-            .audio.loop != true) && (transitionning == false)){this.transitionNextMusic(transitionTime)}
+          let transitionTime = (configContent.config.useTransitionNextMusic == true) ? 6 : 1
+          if (((uiDisplay.duration - cur) <= transitionTime) && (progress != NaN) && (this.audio.readyState >=
+              2) && (this
+              .audio.loop != true) && (transitionning == false)) {
+            this.transitionNextMusic(transitionTime)
+          }
 
-          this.lyricSet()
+          // this.lyricSet()
         }
 
-        let intoLoop=async ()=>{
+        let intoLoop = async () => {
 
           setTimeout(() => {
             intoLoop()
@@ -1499,14 +1028,14 @@ import { nextTick } from 'vue';
         }
 
 
-          // window.requestAnimationFrame((timeTemp)=>{
+        // window.requestAnimationFrame((timeTemp)=>{
 
-          //   intoLoop()
-          // })
+        //   intoLoop()
+        // })
         intoLoop()
       },
       async transitionNextMusic(times) {
-        
+
         let oldAudio = this.audio,
           newAudio = document.createElement("audio")
         // oldAudio.removeEventListener('loadeddata',loadeddataFunction)
@@ -1533,7 +1062,9 @@ import { nextTick } from 'vue';
         }
         //设置音频
         NextMusicCache = this.data.player.musicCache[id]
-        if(!NextMusicCache||transitionning==true){return}
+        if (!NextMusicCache || transitionning == true) {
+          return
+        }
         transitionning = true
         newAudio.src = NextMusicCache.song[NextMusicCache.song.use].url;
         newAudio.volume = .5 * this.state.volume
@@ -1559,7 +1090,7 @@ import { nextTick } from 'vue';
             },
 
           })
-          
+
 
 
           setTimeout(() => {
@@ -1572,7 +1103,6 @@ import { nextTick } from 'vue';
 
         this.id = id,
           this.data.player.uiDisplay.LineNum = -1
-          this.$refs.lyricBox.style.setProperty('--transform', '0px' )
         this.data.player.trackNum = numb
         this['audio'] = newAudio
         let time = times * 1000 || 1000 * (oldAudio.duration - oldAudio.currentTime);
@@ -1626,22 +1156,23 @@ import { nextTick } from 'vue';
         } else this.play()
       },
       play() {
-        let ok=()=>{
+        let ok = () => {
           this.data.player.uiDisplay.duration = Math.floor(this.audio.duration)
-            this.audio.play()
+          this.audio.play()
           audioListener.listen(this.audio)
         }
 
         this.audio.addEventListener('canplay', () => {
           ok()
         })
-        this.audio.addEventListener('loadeddata', () => {ok()
+        this.audio.addEventListener('loadeddata', () => {
+          ok()
         })
         if (this.audio.readyState >= 2) ok()
 
       },
       nextMusic() {
-// debugger
+        // debugger
         //上传听歌记录
 
         this.data.player.uiDisplay.LineNum = -1
@@ -1656,7 +1187,6 @@ import { nextTick } from 'vue';
           this.play()
 
         }
-        this.$refs.lyricBox.style.setProperty('--transform', '0px' )
 
         if (this.data.musicListInfor.personalFM.use == true) this.data.musicListInfor.personalFM.trackNum = this.data
           .player.trackNum
@@ -1670,48 +1200,12 @@ import { nextTick } from 'vue';
           this.play()
         }
       },
-      mainDisplayChange(type) {
-        //settimeout为动画之后的事件，方便优化
-        this.getWindowInfo()
-        let playerMini = document.querySelector('.player-Mini')
 
-        if (this.data.player.uiDisplay.mainDisplay == 'buttom' || type == 'top') {
-          playerMini.style.transition = "all .2s cubic-bezier(.3, .45, .2, .95)"
-
-          document.getElementById('player').style.top = '0px';
-          this.data.player.uiDisplay.mainDisplay = 'watting'
-          playerMini.style.opacity = 0
-          setTimeout(() => {
-            this.data.player.uiDisplay.mainDisplay = 'top';
-            playerMini.style.transition = "none"
-
-            playerMini.style.zIndex = -1;
-          }, 500);
-          return 'top'
-        } else {
-          document.getElementById('player').style.top = 'calc(100% - var(--minplayerHeight) - 18px)'
-          this.data.player.uiDisplay.mainDisplay = 'watting'
-          playerMini.style.transition = "all .1s cubic-bezier(.3, .45, .2, .95) .3s"
-          playerMini.style.opacity = 1
-          playerMini.style.zIndex = 99;
-
-          setTimeout(() => {
-
-            this.data.player.uiDisplay.mainDisplay = 'buttom';
-            playerMini.style.transition = "none"
-
-            playerMini.style.zIndex = 99;
-          }, 500);
-          return 'buttom'
-
-        }
-
-      },
       changeTrack(data) {
         progress.load(this.audio)
         audioListener.listen(this.audio)
 
-        this.getCurr() 
+        this.getCurr()
         this.data.musicListInfor.personalFM.use = false
 
         if (this.data.player.tracks == data.tracks && this.data.player.trackNum == data.num) {
@@ -1725,7 +1219,6 @@ import { nextTick } from 'vue';
           // config.methods.editPlaylist((r) => {
           //   return data
           // })
-          document.getElementById('player').style.top = 'calc(100% - var(--minplayerHeight) - 18px)'
 
         }
 
@@ -1747,9 +1240,6 @@ import { nextTick } from 'vue';
             this.id = this.data.player.tracks[0].id
             this.data.player.trackNum = 0
             this.plays()
-            document.getElementById('player').style.top = 'calc(100% - var(--minplayerHeight) - 18px)'
-
-
           }
         }
       },

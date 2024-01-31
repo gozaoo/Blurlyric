@@ -113,7 +113,7 @@
         <img @click="this.$router.push({name:'detail',query:{id:item.id }})" loading='lazy' :src="item.coverImgUrl + '?param=500y500)'" v-bind:alt="item.name">
         <div class="PlTrTitle">
           <h1>{{item.name}}</h1>
-          <h2>by {{item.creator.nickname}}</h2>
+          <h2 v-if="item">by {{item.creator.nickname}}</h2>
         </div>
       </div>
     </div>
