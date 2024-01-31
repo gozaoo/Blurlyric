@@ -1,5 +1,9 @@
 <!--lyric.vue-->
 <script>
+    import {
+        transform
+    } from '@vue/compiler-core';
+    import anime from 'animejs/lib/anime.es';
     import elemListener from '../js/elemListener';
     import lyricParser from '../js/lyricParser.js'
     export default {
@@ -39,13 +43,13 @@
                         this.state.nowTime = this.audioDom.currentTime
                         let tempactiveLineIndexs = []
                         // 根据时间找到所有激活的行
-                        tempactiveLineIndexs.push(this.lyric.lines.findIndex((value,index) => {
-                            if(value.startTime >= this.state.nowTime){
+                        tempactiveLineIndexs.push(this.lyric.lines.findIndex((value, index) => {
+                            if (value.startTime >= this.state.nowTime) {
                                 return value.startTime >= this.state.nowTime
                             } else {
                                 return false
                             }
-                            
+
                         }))
 
                         if (tempactiveLineIndexs[0] == -1) {
@@ -59,23 +63,24 @@
                                     tempactiveLineIndexs.push(i)
                                 }
                             }
-                            if (!this.deepEqual(this.activeLineIndexs, tempactiveLineIndexs)) {
-                                this.activeLineIndexs.forEach((value,index)=>{
-                                    if(tempactiveLineIndexs.findIndex((value2)=>{value==value2}) != -1&&this.lyric.lines[value-1]){
-                                        this.lyric.lines[value-1]['active'] = true
-                                        return true
-                                    } else if (this.lyric.lines[value-1]){
-                                        this.lyric.lines[value-1]['active'] = false
-                                        return false
-                                    }
-                                })
-                                if(this.lyric.lines[tempactiveLineIndexs[0]-1])this.lyric.lines[tempactiveLineIndexs[0]-1]['active'] = true
-                                this
-                                    .activeLineIndexs =
-                                    tempactiveLineIndexs
-
-                                
-                            }
+                        }
+                        if (!this.deepEqual(this.activeLineIndexs, tempactiveLineIndexs)) {
+                            this.activeLineIndexs.forEach((value, index) => {
+                                if (tempactiveLineIndexs.findIndex((value2) => {
+                                        value == value2
+                                    }) != -1 && this.lyric.lines[value - 1]) {
+                                    this.lyric.lines[value - 1]['active'] = true
+                                    return true
+                                } else if (this.lyric.lines[value - 1]) {
+                                    this.lyric.lines[value - 1]['active'] = false
+                                    return false
+                                }
+                            })
+                            if (this.lyric.lines[tempactiveLineIndexs[0] - 1]) this.lyric.lines[
+                                tempactiveLineIndexs[0] - 1]['active'] = true
+                            this
+                                .activeLineIndexs =
+                                tempactiveLineIndexs
                         }
                         // 如果正在渲染歌词画面，则继续
                         if (this.config.energySavingMode == false) {
@@ -104,12 +109,12 @@
             },
             LyricListRender() {
                 let rendingLine = {}
-                let centerTop = this.tempData.halfWindowHeight * 0.7
+                let centerTop = this.tempData.halfWindowHeight * 0.65
                 let lastTop = centerTop,
                     lastBottom = centerTop
                 let elements = document.querySelectorAll("div>#lyricLine"),
                     halfElementOffsetHeight = 0
-                if (this.lyric.lines[this.activeLineIndexs[0] - 1]) {
+                if (this.lyric.lines[this.activeLineIndexs[0] - 1]&&elements.length>0) {
                     const element = elements[this.activeLineIndexs[0] - 1]
                     halfElementOffsetHeight = element.offsetHeight / 2
                     lastTop = centerTop - halfElementOffsetHeight
@@ -154,7 +159,168 @@
                 }
 
                 this.rendingLine = rendingLine
+            },
+            LyricLineRender(useAnimation, newrendingLine, oldrendingLine) {
+                let lines = document.querySelectorAll("div>#lyricLine")
+                const self = this
+                let needHiddenIndex = [],
+                    stillVisibleIndex = [],
+                    needVisibleIndex = []
+                let useMove = (newrendingLine != undefined && oldrendingLine != undefined)
+                if (useMove == true) {
+
+                    // 找出不同触发类型的元素
+                    for (const key in oldrendingLine) {
+                        if (Object.hasOwnProperty.call(oldrendingLine, key)) {
+                            const value = oldrendingLine[key];
+                            let hasSameIndex = false
+                            for (const key2 in (newrendingLine)) {
+                                const value2 = newrendingLine[key2];
+                                hasSameIndex = (hasSameIndex == false) ? value2.index == value.index : true
+                            }
+                            if (hasSameIndex == true && this.lyric.lines[value.index]) {
+                                stillVisibleIndex.push(value.index)
+                            } else if (this.lyric.lines[value.index]) {
+                                needHiddenIndex.push(value.index)
+                            }
+                        }
+                    }
+                    for (const key in newrendingLine) {
+                        if (Object.hasOwnProperty.call(newrendingLine, key)) {
+                            const value = newrendingLine[key];
+                            let hasSameIndex = false
+                            for (const key2 in (oldrendingLine)) {
+                                const value2 = oldrendingLine[key2];
+
+                                hasSameIndex = (hasSameIndex == false) ? value2.index == value.index : true
+                            }
+                            if (hasSameIndex == false && this.lyric.lines[value.index]) {
+                                needVisibleIndex.push(value.index)
+                            }
+                        }
+                    }
+                }
+                if (useAnimation == true) {
+                    if (useMove == true) {
+                        console.log(needHiddenIndex,stillVisibleIndex,needVisibleIndex);
+                        needHiddenIndex.forEach(info => {
+                            const element = lines[info];
+                            this.cssEditor(element, {
+                                visibility: 'hidden',
+                                transform: 'translateY(0px)'
+                            })
+                        });
+                        needVisibleIndex.forEach(info=>{
+                            const element = lines[info];
+                            this.cssEditor(element, {
+                                visibility: 'visible',
+                                transform: 'translateY('+ newrendingLine[info].top + 'px)'
+                            })
+                        })
+                        anime({
+                            targets: lines,
+                            translateY: (el, index, length) => {
+                                return (newrendingLine[index]) ? (newrendingLine[index].top + 'px') : ('0')
+                            },
+                            delay: (el, index, length) => {
+                                return (newrendingLine[index]) ? ((index - self.activeLineIndexs + 3) *
+                                    50) : 0
+                            },
+                            easing: 'spring(1, 90, 14, 0)',
+
+                        })
+                    }
+                } else {
+                    if (useMove == true && 1 == 2) {
+                        for (let i = 0; i < needHiddenIndex.length; i++) {
+                            const element = lines[needHiddenIndex[i].index];
+                            const info = needHiddenIndex[i]
+                            this.cssEditor(element, {
+                                visibility: 'hidden',
+                                top: '0px'
+                            })
+                        }
+                        for (let i = 0; i < stillVisibleIndex.length; i++) {
+                            const element = lines[stillVisibleIndex[i].index];
+                            const info = stillVisibleIndex[i]
+                            this.cssEditor(element, {
+                                visibility: 'visible',
+                                top: info.top
+                            })
+                        }
+                        for (let i = 0; i < needVisibleIndex.length; i++) {
+                            const element = lines[needVisibleIndex[i].index];
+                            const info = needVisibleIndex[i]
+                            this.cssEditor(element, {
+                                visibility: 'visible',
+                                top: info.top
+                            })
+                        }
+                    }
+                }
+                this.activeLine(lines, useAnimation)
+            },
+            // 高亮行显示
+            activeLine(lines, useAnimation) {
+                if (lines == undefined) lines = document.querySelectorAll("div>#lyricLine")
+                for (const key in this.rendingLine) {
+                    if (Object.hasOwnProperty.call(this.rendingLine, key)) {
+                        const element = this.rendingLine[key];
+                        let hasActive = this.activeLineIndexs.findIndex((value)=>element.index==value)!=-1
+                        if(hasActive == true&&lines[element.index - 1]){
+                            this.cssEditor(lines[element.index - 1], {
+                                color: "#0009",
+                                transform: lines[element.index - 1].style.transform + ' scale(1)'
+                            })
+                        } else if(lines[element.index - 1]) {
+                            this.cssEditor(lines[element.index - 1], {
+                                color: "#0005",
+                                transform: lines[element.index - 1].style.transform + ' scale(0.9)'
+                            })
+                        }
+                    }
+                }
+                // this.activeLineIndexs.forEach((value, index, array) => {
+                //     if (useAnimation == true && lines[value - 1]) {
+                //         // anime({
+                //         //     targets: lines[value - 1],
+                //         //     color: "#0009",
+                //         //     transform: 'scale(1)',
+                //         //     easing: 'spring(1, 80, 13, 0)',
+                //         // })
+
+                //     } else if (lines[value - 1]) {
+                //         this.cssEditor(lines[value - 1], {
+                //             color: "#0009",
+                //             transform: 'scale(1)'
+                //         })
+                //     }
+                // })
+            },
+            cssEditor(element, style) {
+                // 检查传入的是否为一个 DOM 元素
+                if (!(element instanceof Element)) {
+                    return;
+                }
+                // 检查 style 是否为一个对象
+                if (typeof style !== 'object' || style === null) {
+                    return;
+                }
+                // 如果 style 对象为空，则清除元素上的所有内联样式
+                if (Object.keys(style).length === 0) {
+                    element.removeAttribute('style');
+                } else {
+                    // 遍历 style 对象，并应用每个样式规则
+                    for (const property in style) {
+                        element.style.setProperty(property,style[property]);
+                    }
+                }
             }
+
+        },
+        beforeDestroyed: () => {
+            clearInterval(intervalIDs.LyricCalculate);
+            clearInterval(intervalIDs.wfwLyricCalculate);
         },
         props: {
             audioDom: HTMLAudioElement,
@@ -172,6 +338,7 @@
                     }
                     this.lyric = (this.lyricText.type == "yrc") ? lyricParser.parseYRClyric(this.lyricText
                         .content) : lyricParser.parseLRClyric(this.lyricText.content)
+                    this.rendingLine = {}
                     if (this.lyricText.tranContent) {
                         let tranEdLyric = lyricParser.parseLRClyric(this.lyricText.tranContent)
                         this.lyric.headers = {
@@ -181,7 +348,7 @@
                         for (let index = 0; index < this.lyric.lines.length; index++) {
                             const element = this.lyric.lines[index];
                             let tranEdLine = tranEdLyric.lines.find((value) => {
-                                return Math.abs(value.startTime - element.startTime) < 0.1
+                                return Math.abs(value.startTime - element.startTime) < 0.2
                             })
                             if (tranEdLine == undefined) continue
                             element['tranEdContent'] = tranEdLine.text
@@ -197,12 +364,21 @@
                 deep: true
             },
             activeLineIndexs: {
-                handler: async function (newVal) {
-                    if (newVal !== this.lastActiveLineIndexs) {
-                        this.lastActiveLineIndexs = newVal
+                handler: async function (newVal, oldVal) {
+                    if (!this.deepEqual(newVal, this.lastActiveLineIndexs)) {
+                        this.lastActiveLineIndexs = newVal,
+                            this.LyricLineRender(true)
                     }
                 },
-                // deep: true
+                deep: true
+            },
+            rendingLine: {
+                handler: async function (newVal, oldVal) {
+                    if (!this.deepEqual(oldVal, this.rendingLine)) {
+                        this.LyricLineRender(true, newVal, oldVal)
+                    }
+                },
+                deep: true
             }
         },
         created() {
@@ -223,17 +399,12 @@
 </script>
 <template>
     <div ref="lyricRow" v-if="lyric&&lyric.type != 'none'&&lyric.lines" class="lyricRow">
-        <div :style="(rendingLine[index])?{
-            visibility: 'visible',
-            top: (rendingLine[index].top+'px'),
-        color: (index+1==activeLineIndexs[0])?'#0009':'#0007',
-        transform: (index+1==activeLineIndexs[0])?'scale(1)':'scale(.8)',
-    
-        }:{visibility: 'hidden'}" v-for="(item, index) in lyric.lines" :key="index" id="lyricLine" class="lyricLine">
+        <div v-for="(item, index) in lyric.lines" :key="item.text" id="lyricLine" class="lyricLine">
             <div v-if="item" class="content">
                 <div v-if="lyric.type == 'lrc'">{{ item.text }}</div>
                 <div v-if="lyric.type == 'yrc'&&item.active!=true">{{ item.text }}</div>
-                <span v-for="(line,wordIndex) in item.words" v-if="lyric.type == 'yrc'&&item.active==true">{{ line.word }}</span>
+                <span v-for="(line,wordIndex) in item.words"
+                    v-if="lyric.type == 'yrc'&&item.active==true">{{ line.word }}</span>
             </div>
             <div v-if="item&&item.tranEdContent" class="tran">
                 <div>{{ item.tranEdContent }}</div>
@@ -253,19 +424,21 @@
     .lyricLine {
         position: absolute;
         font-size: min(2.5vh, 2vw);
-        padding: 0.5em 0;
-        color: #0007;
+        padding: 0.9em 0;
+        color: #0005;
         font-weight: 900;
-        transition: top 0.3s, color 0.3s, transform 0.3s;
-        transform: scale(0.95);
-        transform-origin: 0% 50%
+        transition: color 0.3s;
+        transform-origin: 0% 50%;
+        visibility: hidden;
+        transform: scale(0.9);
+        will-change: transform,visibility,color
     }
 
     div.content {
-        font-size: 1.9em;
+        font-size: 1.8em;
     }
 
     div.tran {
-        font-size: 1.4em;
+        font-size: 1.2em;
     }
 </style>
