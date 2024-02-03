@@ -36,63 +36,29 @@
             checkConfig(config) {
 
             },
+            // 确定是否需要激活某一行歌词
+            shouldActivateLine(line, currentTime) {
+                return line.startTime <= currentTime && currentTime < line.endTime;
+            },
+            updateActiveLines(currentTime) {
+                const activeLines = this.lyric.lines.filter(line =>
+                    this.shouldActivateLine(line, currentTime)
+                );
+                const activeLineIndices = activeLines.map(line => this.lyric.lines.indexOf(line));
+                this.activeLineIndexs = activeLineIndices;
+            },
+            // 计算当前应该激活的歌词行
             LyricCalculate() {
-                const self = this
+                if (this.lyric.type !== 'none') {
+                    this.state.nowTime = this.audioDom.currentTime;
+                    this.updateActiveLines(this.state.nowTime);
 
-                if (this.lyric.type != 'none') {
-                    this.state.nowTime = this.audioDom.currentTime
-                    let tempactiveLineIndexs = []
-                    // 根据时间找到所有激活的行
-                    tempactiveLineIndexs.push(this.lyric.lines.findIndex((value, index) => {
-                        if (value.startTime <= this.state.nowTime && value.endTime >= this.state
-                            .nowTime) {
-                            return true
-                        } else {
-                            return false
-                        }
-
-                    }))
-
-                    if (tempactiveLineIndexs[0] == -1) {
-                        if (!this.deepEqual(this.activeLineIndexs, [])) this.activeLineIndexs = []
-                        return
-                    } else {
-                        for (let i = tempactiveLineIndexs[0] + 1; i < this.lyric.lines.length; i++) {
-                            const element = this.lyric.lines[i];
-                            if (element.startTime <= this.state.nowTime && element.endTime >= this.state
-                                .nowTime) {
-                                tempactiveLineIndexs.push(i)
-                            }
-                        }
-                    }
-                    if (!this.deepEqual(this.activeLineIndexs, tempactiveLineIndexs)) {
-
-                        this.activeLineIndexs.forEach((value, index) => {
-                            if (tempactiveLineIndexs.findIndex((value2) => {
-                                    value == value2
-                                }) != -1 && this.lyric.lines[value]) {
-                                this.lyric.lines[value]['active'] = true
-                                return true
-                            } else if (this.lyric.lines[value]) {
-                                this.lyric.lines[value]['active'] = false
-                                return false
-                            }
-                        })
-                        if (this.lyric.lines[tempactiveLineIndexs[0]]) this.lyric.lines[
-                            tempactiveLineIndexs[0]]['active'] = true
-                        this
-                            .activeLineIndexs =
-                            tempactiveLineIndexs
-                    }
                     // 如果正在渲染歌词画面，则继续
                     if (this.config.energySavingMode == false) {
-
                         // 计算应该显示的行和理应的赋值
                         this.LyricListRender()
                     }
-
                 }
-
             },
             LyricCalculateIntervalLuncher() {
                 this.intervalIDs.LyricCalculate = setInterval(() => {
@@ -132,7 +98,7 @@
                         top: centerTop - halfElementOffsetHeight
                     }
                 }
-                if(this.activeLineIndexs[0] == undefined){
+                if (this.activeLineIndexs[0] == undefined) {
                     this.activeLineIndexs[0] = -1
                 }
                 for (let i = this.activeLineIndexs[0] - 1; lastBottom >= 0; i--) {
@@ -219,15 +185,15 @@
                         needHiddenIndex.forEach(info => {
                             const element = lines[info];
                             this.cssEditor(element, {
+                                transform: 'translateY(100vh)',
                                 visibility: 'hidden',
-                                transform: 'translateY(100vh)'
                             })
                         });
                         needVisibleIndex.forEach(info => {
                             const element = lines[info];
                             this.cssEditor(element, {
+                                transform: 'translateY(' + newrendingLine[info].top + 'px)',
                                 visibility: 'visible',
-                                transform: 'translateY(' + newrendingLine[info].top + 'px)'
                             })
                         })
                         anime({
@@ -258,7 +224,7 @@
                             const info = stillVisibleIndex[i]
                             this.cssEditor(element, {
                                 visibility: 'visible',
-                                top: info.top
+                                top: info.top + 'px'
                             })
                         }
                         for (let i = 0; i < needVisibleIndex.length; i++) {
@@ -266,7 +232,7 @@
                             const info = needVisibleIndex[i]
                             this.cssEditor(element, {
                                 visibility: 'visible',
-                                top: info.top
+                                top: info.top + 'px'
                             })
                         }
                     }
@@ -424,7 +390,7 @@
 </script>
 <template>
     <div ref="lyricRow" v-if="lyric&&lyric.type != 'none'&&lyric.lines" class="lyricRow">
-        <div v-for="(item, index) in lyric.lines" :key="item.text" id="lyricLine" class="lyricLine">
+        <div v-for="(item, index) in lyric.lines" style="transform:translateY(100vh) " :key="item.text" id="lyricLine" class="lyricLine">
             <div style="color:rgb(0, 0, 0,0.3);transform:scale(0.9)" class="lyricTextRow">
 
                 <div v-if="item" class="content">
