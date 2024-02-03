@@ -78,7 +78,7 @@
                         })
                         this.tempSetTimeoutSaver= setTimeout(() => {
                             this.$nextTick(()=>{
-                                this.$refs.player.style.height = '100vh'
+                                this.$refs.player.style.height = '100%'
                                 this.$refs.highQualityView.style.display='block'
                             })
                         }, 1300);
@@ -185,7 +185,7 @@
 
 <template>
     <div ref="player" :class="['player',displayState]">
-        <div v-if="displayState!='top'" class="processbar">
+        <div id="audioProgress" v-if="displayState!='top'" class="processbar">
             <div :style="{'width': (playerState.icurrentTime / playerState.durationTime * 100).toFixed(2) + '%'}"
                 class="progress"></div>
             <!-- <span>{{ playerState.currentTime }}</span> -->
@@ -236,7 +236,7 @@
                         </div><button type="button" class="moreButtom"><i class="bi bi-three-dots"></i></button>
                     </div>
                     <div class="progressControl">
-                        <div class="slider ">
+                        <div id="audioProgress" class="slider ">
                             <div :style="{'width': (playerState.icurrentTime / playerState.durationTime * 100).toFixed(2) + '%'}" class="inner">
                                 <div class="thumb"></div>
                             </div>

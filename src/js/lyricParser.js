@@ -31,7 +31,7 @@ export default {
                 line.replace(/\((\d+),(\d+),\d+\)([^\(]*)/g, (_, wordStart, wordDuration, word) => {
                     let startTime = Number(wordStart) / 1000,
                         duration = Number(wordDuration) / 1000;
-                    let endTime = Number((startTime - duration).toFixed(3))
+                    let endTime = Number((startTime + duration).toFixed(3))
 
                     words.push({
                         startTime,
@@ -48,7 +48,7 @@ export default {
                 lyrics.lines.push({
                     startTime,
                     duration,
-                    endTime: startTime + duration,
+                    endTime: words[words.length-1].endTime,
                     words,
                     text
                 });
