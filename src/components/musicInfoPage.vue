@@ -237,7 +237,7 @@
                     </div>
                     <div class="progressControl">
                         <div id="audioProgress" class="slider ">
-                            <div :style="{'width': (playerState.icurrentTime / playerState.durationTime * 100).toFixed(2) + '%'}" class="inner">
+                            <div :style="{'--musicProgressPercent': (playerState.icurrentTime / playerState.durationTime)}" class="inner">
                                 <div class="thumb"></div>
                             </div>
                         </div>
@@ -552,6 +552,7 @@
     }
 
     .slider .inner{
+        width: calc(var(--musicProgressPercent) * 100%);
         height:inherit;
         background-color: #000a;
     }

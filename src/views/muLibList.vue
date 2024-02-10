@@ -21,8 +21,7 @@
     </div>
     <div class="topBlockRightButtom">
       <div class="linkbox bigger">
-        <a style="user-select:none" @click="loginOut()"><svg xmlns="http://www.w3.org/2000/svg"
-            style="height: 1.25em"
+        <a style="user-select:none" @click="loginOut()"><svg xmlns="http://www.w3.org/2000/svg" style="height: 1.25em"
             fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
             <path fill-rule="evenodd"
               d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
@@ -36,21 +35,28 @@
   <div></div>
   <div class="muLib-MainBox">
     <!--我喜欢的Block-->
-    <div v-if="app.data.user.account && app.data.user.profile"
-      @click="this.$router.push({name:'detail',query:{id:app.data.myMusicList[0].id }})" style=";
+    <!-- <div v-if="app.data.user.account && app.data.user.profile"
+      style=";
 ;background-color:#5080ff;overflow:hidden; ">
       <p style="user-select:none ;position: relative;box-shadow: rgb(80 128 255) 0px 9px 14px 7px;z-index: 5;">我喜欢的
       </p>
 
-    </div>
-
+    </div> -->
+    <card_wide v-if="app.data.myMusicList[0]" @click="this.$router.push({name:'detail',query:{id:app.data.myMusicList[0].id }})"  :imageSrc="app.data.myMusicList[0].coverImgUrl+'?param=512y512'" :title="'喜欢的音乐'">
+      <i class="bi bi-box2-heart-fill"></i>
+    </card_wide>
+    <card_wide v-if="app.data.recommendSongs[0]" @click="this.$router.push({name:'dailySongs'})" :imageSrc="app.data.recommendSongs[0].al.picUrl+'?param=512y512'" :title="'每日推荐'">
+      <i class="bi bi-box2-fill"></i>
+    </card_wide><card_wide v-if="app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum]" @click="app.usePersonalFM()" :imageSrc="app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum].al.picUrl+'?param=512y512'" :title="'私人电台'">
+      <i class="bi bi-broadcast"></i>
+    </card_wide>
     <!--
             
             我喜欢的Block End
             
             
             -->
-    <div @click="this.$router.push({name:'dailySongs'})" style=" color: #666;;
+    <!-- <div  style=" color: #666;;
 ;background-color:#eeeeee ;overflow:hidden; ">
 
       <p style="user-select:none ;position: relative;z-index: 5;">每日推荐
@@ -59,14 +65,14 @@
         style="user-select:none ;position: absolute;right: -1vw;bottom: -1vw;color:#00000005;font-size: 12vw;;z-index: 1;">
         Daily
       </p>
-    </div>
+    </div> -->
 
     <!--
 
         私人FM
  
     -->
-    <div v-bind:class="(app.data.user.profile == null) + ' personalFMCard'"
+    <!-- <div v-bind:class="(app.data.user.profile == null) + ' personalFMCard'"
       v-if="app.data.musicListInfor&&app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum]"
       style="background-color: #666">
       <div class="thisImg">
@@ -91,7 +97,7 @@
       </div>
 
     </div>
-
+ -->
 
   </div>
 
@@ -99,18 +105,18 @@
   <div v-if="app.data.myMusicList[0] != undefined">
     <h1>我收藏的歌单</h1>
     <div class="PLtrack">
-      <div class="Pltracks" 
-        v-for="(item,i) in app.data.myMusicList" :key="item.id">
+      <div class="Pltracks" v-for="(item,i) in app.data.myMusicList" :key="item.id">
         <div class="PlButtom">
           <a @click="removePl(item.id,i)">
-          <svg xmlns=" http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
-            viewBox="0 0 16 16">
-            <path
-              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            <svg xmlns=" http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
+              viewBox="0 0 16 16">
+              <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
             </svg>
           </a>
         </div>
-        <img @click="this.$router.push({name:'detail',query:{id:item.id }})" loading='lazy' :src="item.coverImgUrl + '?param=500y500)'" v-bind:alt="item.name">
+        <img @click="this.$router.push({name:'detail',query:{id:item.id }})" loading='lazy'
+          :src="item.coverImgUrl + '?param=500y500)'" v-bind:alt="item.name">
         <div class="PlTrTitle">
           <h1>{{item.name}}</h1>
           <h2 v-if="item">by {{item.creator.nickname}}</h2>
@@ -124,7 +130,7 @@
   import reTools from '../network/getData'
   import message from '../js/message.js'
   import app from '../main.js'
-
+import card_wide from '../components/card-wide.vue'
   export default {
     name: 'muLib',
     data() {
@@ -138,6 +144,9 @@
       data: function (val) {
         this.data = val
       }
+    },
+    components:{
+      card_wide
     },
     methods: {
       loginOut() {
@@ -154,21 +163,24 @@
         }
         location.reload()
       },
-      removePl(id,i){
-        if(i==0) {
+      removePl(id, i) {
+        if (i == 0) {
           message.create('不可以删除 我喜欢的 歌单')
           return
         }
-        reTools.getData('/playlist/subscribe',{id:id,t:2})
-        message.create('已删除 '+app.data.myMusicList[i].name+' 歌单\n')
+        reTools.getData('/playlist/subscribe', {
+          id: id,
+          t: 2
+        })
+        message.create('已删除 ' + app.data.myMusicList[i].name + ' 歌单\n')
 
-        app.data.myMusicList.splice(i,1)
+        app.data.myMusicList.splice(i, 1)
 
       }
     },
   }
 </script>
-<style>
+<style scoped>
   /* 
 
     顶部头像方块
@@ -206,13 +218,12 @@
   }
 
   .topBlockText h2 {
-    margin: 5px 0;
+    margin: .5em 0 0 0;
     font-size: 1.6em;
-
   }
 
   .topBlockText h1 {
-    margin: 13px 0;
+    margin: 0em 0;
     font-size: 2.3em;
 
   }
@@ -296,11 +307,11 @@
   .muLib-MainBox {
     padding: 10px 0;
     height: max-content;
-    display: grid;
-    gap: 3vw;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    gap: 2.5vmin;
+    flex-wrap: wrap;
   }
-
+/* 
   .muLib-MainBox>div {
     position: relative;
     font-size: 28px;
@@ -308,18 +319,15 @@
     color: white;
     padding: 20px 30px;
     height: calc(8vh + 5vw);
-  }
+    width: max-content;
+    min-width: min-content;
+  } */
 
   .muLib-MainBox>div>p {
     margin: 5px 0;
   }
 
   @media (max-width: 450px) {
-    .muLib-MainBox {
-
-      grid-template-columns: repeat(1, 1fr);
-    }
-
     .muLib-MainBox>div {
       font-size: 24px;
     }
@@ -332,6 +340,4 @@
 
     }
   }
-
-
 </style>

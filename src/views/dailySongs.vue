@@ -2,11 +2,11 @@
   <h2><a style="font-size:1.5em">{{ new Date().getDate() }}</a>
     <a>/{{(new Date().getMonth() + 1)}} <br>今日日推</a>
 
-  </h2> <a @click="app.changeTrack({tracks: app.data.recommendSongs.data.dailySongs,num : 0})"
+  </h2> <a @click="app.changeTrack({tracks: app.data.recommendSongs,num : 0})"
     class="linkbox"><a>播放全部</a></a><br>
-  <div style="clean: both" class="track" v-if="app.data.recommendSongs.data">
-    <div @click="setTracks(app.data.recommendSongs.data.dailySongs,i)" class="tracks" :muid="item.id"
-      v-for="(item,i) in app.data.recommendSongs.data.dailySongs" :key="item.id">
+  <div style="clean: both" class="track" >
+    <div @click="setTracks(app.data.recommendSongs,i)" class="tracks" :muid="item.id"
+      v-for="(item,i) in app.data.recommendSongs" :key="item.id">
       <div class="infor">
         <div class="trackIMG">
 
@@ -23,10 +23,7 @@
           })"> {{name.name}}</a></h2>
 
         </div>
-        <div v-if="app.data.recommendSongs.data.recommendReasons.find((reason)=>{return reason.songId == item.id})"
-          class="trackAl">
-          {{ app.data.recommendSongs.data.recommendReasons.find((reason)=>{return reason.songId == item.id}).reason  }}
-        </div>
+
       </div>
       <div class="linkbox bigger">
         <a @click="app.pushTrack(item)">

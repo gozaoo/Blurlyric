@@ -680,16 +680,16 @@
             this.data.user = r.data
 
             this.myPlayList()
+
+            reTools.getData('/recommend/songs').then(r => {
+              this.data.recommendSongs = r.data.dailySongs
+            })
             //自动签到
             reTools.getData('/daily_signin', {
               type: 0
             });
             reTools.getData('/daily_signin', {
               type: 1
-            })
-
-            reTools.getData('/recommend/songs').then(r => {
-              this.data.recommendSongs = r
             })
           }
 

@@ -64,7 +64,7 @@ function changeProgress(event, box) {
     }
     if (tempData.percent < 0) tempData.percent = 0
 
-    box.style = '--musicProgressPercent:' + (tempData.percent)
+    box.style = '--musicProgressPercent:' + (tempData.percent).toFixed(4)
     changeMusicTimeOfProgress(tempData.percent)
 
 }
@@ -73,7 +73,7 @@ function changeMusicTimeOfProgress(percent) {
     if (!data.audio) {
         return
     }
-    data.audio.currentTime = data.audio.duration * percent
+    data.audio.currentTime = Number((data.audio.duration * percent).toFixed(2))
 }
 
 

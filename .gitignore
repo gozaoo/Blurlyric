@@ -9,3 +9,4 @@ data/user/*.json
 out/*/
 >>>>>>> server
 *.zip
+blurlyric/download/

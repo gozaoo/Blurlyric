@@ -56,14 +56,13 @@
                     // 如果正在渲染歌词画面，则继续
                     if (this.config.energySavingMode == false) {
                         // 计算应该显示的行和理应的赋值
-                        this.LyricListRender()
                     }
                 }
             },
             LyricCalculateIntervalLuncher() {
                 this.intervalIDs.LyricCalculate = setInterval(() => {
                     this.LyricCalculate()
-                }, 80);
+                }, 100);
             },
             deepEqual(obj1, obj2) {
                 if (obj1 === obj2) return true;
@@ -82,11 +81,12 @@
             },
             LyricListRender() {
                 let rendingLine = {}
-                let centerTop = this.tempData.halfWindowHeight * 0.65
+                let centerTop = window.innerHeight * 0.3
                 let lastTop = centerTop,
                     lastBottom = centerTop
                 let elements = document.querySelectorAll("div>#lyricLine"),
                     halfElementOffsetHeight = 0
+                if(!this.lyric.lines) return
                 if (this.lyric.lines[this.activeLineIndexs[0]] && elements.length > 0) {
                     const element = elements[this.activeLineIndexs[0]]
                     halfElementOffsetHeight = element.offsetHeight / 2
@@ -254,7 +254,6 @@
                                     scale: '1',
                                     easing: 'spring(1, 80, 13, 0)',
                                 })
-
                             } else {
                                 this.cssEditor(lines[element.index], {
                                     color: "rgb(0, 0, 0,0.5)",
@@ -270,10 +269,7 @@
                                     easing: 'spring(1, 80, 13, 0)',
                                 })
 
-
                             } else {
-
-
                                 this.cssEditor(lines[element.index], {
                                     color: "rgb(0, 0, 0,0.3)",
                                     transform: lines[element.index].style.transform + ' scale(0.9)'
@@ -326,6 +322,7 @@
                     this.lyric = (this.lyricText.type == "yrc") ? lyricParser.parseYRClyric(this.lyricText
                         .content) : lyricParser.parseLRClyric(this.lyricText.content)
                     this.rendingLine = {}
+
                     if (this.lyricText.tranContent) {
                         let tranEdLyric = lyricParser.parseLRClyric(this.lyricText.tranContent)
                         this.lyric.headers = {
@@ -358,8 +355,11 @@
             activeLineIndexs: {
                 handler: async function (newVal, oldVal) {
                     if (!this.deepEqual(newVal, this.lastActiveLineIndexs)) {
-                        this.lastActiveLineIndexs = newVal,
-                            console.log(this.activeLineIndexs);
+                        this.lastActiveLineIndexs = newVal
+
+                        if (!this.deepEqual(newVal, {})) {
+                            this.LyricListRender()
+                        }
                         this.activeLine(undefined, true)
 
                     }
@@ -380,18 +380,28 @@
             this.checkConfig()
             this.LyricCalculateIntervalLuncher()
             let cacheWindowHeight = () => {
-                this.tempData.windowHeight = window.innerHeight
-                this.tempData.halfWindowHeight = self.tempData.windowHeight / 2
+                this.$nextTick(() => {
+                    this.tempData.windowHeight = window.innerHeight
+                    this.tempData.halfWindowHeight = self.tempData.windowHeight / 2
+                    this.$nextTick(() => {
+                        this.LyricListRender()
+                    })
+                })
             }
-            elemListener.onWindowsResize(cacheWindowHeight)
+            elemListener.onWindowsResize(() => {
+                console.log(1);;
+                cacheWindowHeight();
+            })
             this.$nextTick(cacheWindowHeight)
         }
     }
 </script>
 <template>
     <div ref="lyricRow" v-if="lyric&&lyric.type != 'none'&&lyric.lines" class="lyricRow">
-        <div v-for="(item, index) in lyric.lines" style="transform:translateY(100vh) " :key="item.text" id="lyricLine" class="lyricLine">
-            <div style="color:rgb(0, 0, 0,0.3);transform:scale(0.9)" class="lyricTextRow">
+        <div v-for="(item, index) in lyric.lines" style="transform:translateY(100vh) " :key="item.text" id="lyricLine"
+            class="lyricLine">
+
+            <div style="color:rgb(0, 0, 0,0);transform:scale(0.9)" class="lyricTextRow">
 
                 <div v-if="item" class="content">
                     <div v-if="lyric.type == 'lrc'">{{ item.text }}</div>
@@ -403,7 +413,7 @@
                     <div>{{ item.tranEdContent }}</div>
 
                 </div>
-            </div>
+        </div>
 
         </div>
     </div>
@@ -412,7 +422,6 @@
     .lyricRow {
         display: relative;
         height: 100vh;
-
     }
 
     .lyricLine {
@@ -429,12 +438,8 @@
 
     .lyricTextRow {
         transform: scale(0.9);
-        /* color: rgb(0, 0, 0,0.5); */
-
-        color: rgb(0, 0, 0, 0.3);
         will-change: transform, color;
         transform-origin: 3% 50%;
-
     }
 
     div.content {
