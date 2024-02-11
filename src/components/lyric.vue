@@ -6,6 +6,7 @@
     import anime from 'animejs/lib/anime.es';
     import elemListener from '../js/elemListener';
     import lyricParser from '../js/lyricParser.js'
+    import lyricLineWordbyword from './lyric-line-wordbyword.vue';
     export default {
         data() {
             return {
@@ -31,6 +32,9 @@
                 lastActiveLineIndexs: [],
                 rendingLine: {}
             }
+        },
+        components:{
+            lyricLineWordbyword
         },
         methods: {
             checkConfig(config) {
@@ -86,7 +90,7 @@
                     lastBottom = centerTop
                 let elements = document.querySelectorAll("div>#lyricLine"),
                     halfElementOffsetHeight = 0
-                if(!this.lyric.lines) return
+                if (!this.lyric.lines) return
                 if (this.lyric.lines[this.activeLineIndexs[0]] && elements.length > 0) {
                     const element = elements[this.activeLineIndexs[0]]
                     halfElementOffsetHeight = element.offsetHeight / 2
@@ -181,7 +185,6 @@
                 }
                 if (useAnimation == true) {
                     if (useMove == true) {
-                        console.log(needHiddenIndex, stillVisibleIndex, needVisibleIndex);
                         needHiddenIndex.forEach(info => {
                             const element = lines[info];
                             this.cssEditor(element, {
@@ -192,8 +195,21 @@
                         needVisibleIndex.forEach(info => {
                             const element = lines[info];
                             this.cssEditor(element, {
-                                transform: 'translateY(' + newrendingLine[info].top + 'px)',
+                                // transform: 'translateY(' + newrendingLine[info].top + 'px)',
                                 visibility: 'visible',
+                            })
+                            let offsetStartPosition = (oldrendingLine[info])?(oldrendingLine[info].top - newrendingLine[info].top):0
+                            anime({
+                                targets: element,
+                                // 防止歌词更新过快，而新生成的歌词直接覆盖
+                                translateY: (newrendingLine[info-1])?([(newrendingLine[info].top + offsetStartPosition) + 'px',newrendingLine[info].top+'px']):([newrendingLine[info].top+'px',newrendingLine[info].top+'px']),
+                                delay: (el, index, length) => {
+                                    return (newrendingLine[info.index]) ? ((info.index - self
+                                            .activeLineIndexs + 3) *
+                                        50) : 0
+                                },
+                                easing: 'spring(1, 90, 14, 0)',
+
                             })
                         })
                         anime({
@@ -250,13 +266,13 @@
                             if (useAnimation == true) {
                                 anime({
                                     targets: lines[element.index],
-                                    color: "rgb(0, 0, 0,0.5)",
+                                    color: "rgb(0, 0, 0, .6)",
                                     scale: '1',
                                     easing: 'spring(1, 80, 13, 0)',
                                 })
                             } else {
                                 this.cssEditor(lines[element.index], {
-                                    color: "rgb(0, 0, 0,0.5)",
+                                    color: "rgb(0, 0, 0, .6)",
                                     transform: lines[element.index].style.transform + ' scale(1)'
                                 })
                             }
@@ -389,7 +405,6 @@
                 })
             }
             elemListener.onWindowsResize(() => {
-                console.log(1);;
                 cacheWindowHeight();
             })
             this.$nextTick(cacheWindowHeight)
@@ -405,15 +420,14 @@
 
                 <div v-if="item" class="content">
                     <div v-if="lyric.type == 'lrc'">{{ item.text }}</div>
-                    <div v-if="lyric.type == 'yrc'&&item.active!=true">{{ item.text }}</div>
-                    <span v-for="(line,wordIndex) in item.words"
-                        v-if="lyric.type == 'yrc'&&item.active==true">{{ line.word }}</span>
+                    <div v-if="lyric.type == 'yrc'&&!activeLineIndexs.includes(index)">{{ item.text }}</div>
+                    <lyricLineWordbyword :audioDom="this.audioDom" :words="item.words" v-if="lyric.type == 'yrc'&&activeLineIndexs.includes(index)" />
                 </div>
                 <div v-if="item&&item.tranEdContent" class="tran">
                     <div>{{ item.tranEdContent }}</div>
 
                 </div>
-        </div>
+            </div>
 
         </div>
     </div>
