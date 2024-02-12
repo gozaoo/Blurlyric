@@ -54,7 +54,7 @@
             // 计算当前应该激活的歌词行
             LyricCalculate() {
                 if (this.lyric.type !== 'none') {
-                    this.state.nowTime = this.audioDom.currentTime;
+                    this.state.nowTime = this.audioDom.currentTime+0.3;
                     this.updateActiveLines(this.state.nowTime);
 
                     // 如果正在渲染歌词画面，则继续
@@ -413,7 +413,7 @@
 </script>
 <template>
     <div ref="lyricRow" v-if="lyric&&lyric.type != 'none'&&lyric.lines" class="lyricRow">
-        <div v-for="(item, index) in lyric.lines" style="transform:translateY(100vh) " :key="item.text" id="lyricLine"
+        <div v-for="(item, index) in lyric.lines" style="transform:translateY(100vh) " :key="item.startTime" id="lyricLine"
             class="lyricLine">
 
             <div style="color:rgb(0, 0, 0,0);transform:scale(0.9)" class="lyricTextRow">

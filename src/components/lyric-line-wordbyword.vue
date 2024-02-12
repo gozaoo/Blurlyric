@@ -17,7 +17,7 @@
             },
             updateActiveLines() {
                 // 获取当前音频播放的时间
-                const currentTime = this.audioDom.currentTime+0.15;
+                const currentTime = this.audioDom.currentTime+0.3;
 
                 const activeWordsIndex =[];
                 // 在words中找出当前的词
@@ -92,13 +92,13 @@
         display: inline;
         background-origin: content-box;
         background-clip: text;
-        --background-transition-linear-gradient-progress-width: 0.8em !important;
+        --background-transition-linear-gradient-progress-width: 0.628em !important;
         background: linear-gradient(90deg, rgb(0, 0, 0, .6) 0%, rgb(0, 0, 0, .6) calc(50% - calc(var(--background-transition-linear-gradient-progress-width)/2)), rgba(0, 0, 0, .3) calc(50% + calc(var(--background-transition-linear-gradient-progress-width)/2)), rgba(0, 0, 0, .3) 100%);
         background-size: calc(200% + var(--background-transition-linear-gradient-progress-width) * 2) 100%;
         -webkit-background-clip: text;
         background-position: calc(100% - var(--progress)) 0%;
         background-repeat: no-repeat;
         color: transparent !important;
-        will-change:background
+        /* will-change:background */
     }
 </style>
