@@ -46,7 +46,7 @@
                         progress: musicProgressPercentage * 100 + '%', // 将百分比转换为宽度百分比
                         easing: 'linear',
                         round: 10,
-                        duration: 150 // 可以根据需要调整动画持续时间
+                        duration: 200 // 可以根据需要调整动画持续时间
                     })
                 }
             },
@@ -68,7 +68,7 @@
                     }
                 });
 
-                this.updateActiveLinesIntervalID = setInterval(this.updateActiveLines, 150);
+                this.updateActiveLinesIntervalID = setInterval(this.updateActiveLines, 200);
             });
         },
         beforeDestroy() {

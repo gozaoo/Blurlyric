@@ -206,7 +206,7 @@
                                 delay: (el, index, length) => {
                                     return (newrendingLine[info.index]) ? ((info.index - self
                                             .activeLineIndexs + 3) *
-                                        50) : 0
+                                        45) : 0
                                 },
                                 easing: 'spring(1, 90, 14, 0)',
 
@@ -219,7 +219,7 @@
                             },
                             delay: (el, index, length) => {
                                 return (newrendingLine[index]) ? ((index - self.activeLineIndexs + 3) *
-                                    50) : 0
+                                    45) : 0
                             },
                             easing: 'spring(1, 90, 14, 0)',
 

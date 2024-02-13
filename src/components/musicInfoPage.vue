@@ -455,6 +455,7 @@
         grid-template-columns: [info-side] .75fr [player-side] 1fr;
         gap: 8px;
         transition: .5s ease-in-out;
+        font-size: min(2.5vh, 2vw);
         left: 0%;
         z-index: 0
     }
@@ -486,7 +487,6 @@
         width: min(50vh, 40vw);
         flex-direction: column;
         margin: 1em auto;
-        font-size: min(2.5vh, 2vw);
         color: #000e
     }
 
@@ -547,7 +547,7 @@
         border-radius: 0.4em;
         background-color: #0001;
         transition: 0.2s;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 16px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1.2em;
         overflow:hidden
     }
 
@@ -567,7 +567,7 @@
         display: flex;
         color: #0008;
         font-weight: 900;
-        font-size: 10px;
+        font-size: 0.6em;
         flex-direction: row;
         justify-content: space-between
     }
