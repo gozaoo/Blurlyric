@@ -42,86 +42,68 @@
       </p>
 
     </div> -->
-    <card_wide v-if="app.data.myMusicList[0]" @click="this.$router.push({name:'detail',query:{id:app.data.myMusicList[0].id }})"  :imageSrc="app.data.myMusicList[0].coverImgUrl+'?param=512y512'" :title="'喜欢的音乐'">
+    <card_wide v-if="app.data.myMusicList[0]"
+      @click="this.$router.push({name:'detail',query:{id:app.data.myMusicList[0].id }})"
+      :imageSrc="app.data.myMusicList[0].coverImgUrl+'?param=16y16'" :title="'喜欢的音乐'">
+      <template v-slot:headicon>
+      
       <i class="bi bi-box2-heart-fill"></i>
+      </template>
     </card_wide>
-    <card_wide v-if="app.data.recommendSongs[0]" @click="this.$router.push({name:'dailySongs'})" :imageSrc="app.data.recommendSongs[0].al.picUrl+'?param=512y512'" :title="'每日推荐'">
+    <card_wide v-if="app.data.recommendSongs[0]" @click="this.$router.push({name:'dailySongs'})"
+      :imageSrc="app.data.recommendSongs[0].al.picUrl+'?param=16y16'" :title="'每日推荐'">
+      <template v-slot:headicon>
       <i class="bi bi-box2-fill"></i>
-    </card_wide><card_wide v-if="app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum]" @click="app.usePersonalFM()" :imageSrc="app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum].al.picUrl+'?param=512y512'" :title="'私人电台'">
-      <i class="bi bi-broadcast"></i>
+      </template>
     </card_wide>
-    <!--
-            
-            我喜欢的Block End
-            
-            
-            -->
-    <!-- <div  style=" color: #666;;
-;background-color:#eeeeee ;overflow:hidden; ">
-
-      <p style="user-select:none ;position: relative;z-index: 5;">每日推荐
-      </p>
-      <p
-        style="user-select:none ;position: absolute;right: -1vw;bottom: -1vw;color:#00000005;font-size: 12vw;;z-index: 1;">
-        Daily
-      </p>
-    </div> -->
-
-    <!--
-
-        私人FM
- 
-    -->
-    <!-- <div v-bind:class="(app.data.user.profile == null) + ' personalFMCard'"
-      v-if="app.data.musicListInfor&&app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum]"
-      style="background-color: #666">
-      <div class="thisImg">
-        <img
-          v-bind:src="app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum].al.picUrl  +'?param=512y512'"
-          alt="" srcset="">
-        <img
-          v-bind:src="app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum].al.picUrl  +'?param=512y512'"
-          alt="" srcset="">
-      </div>
-      <div class="personalbackground"
-        v-bind:style="'background-image:url(' + app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum].album.picUrl  +'?param=32y32)'"
-        alt="" srcset="">
-      </div>
-      <div class="Text">
-        <p style="margin-top: 0;">
-          <div style="color: #eee;font-size: 0.75em">为您推荐 <a
-              style="font-size: 0.8em;height: inherit;justify-items: center;">- 私人FM</a></div>
-          {{ app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum].name}}
-        </p>
-        <div @click="this.$parent.$parent.$parent.usePersonalFM()" class="playButtom"></div>
-      </div>
-
-    </div>
- -->
+    <card_wide v-if="app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum]"
+      @click="app.usePersonalFM()"
+      :imageSrc="app.data.musicListInfor.personalFM.tracks[app.data.musicListInfor.personalFM.trackNum].al.picUrl+'?param=16y16'"
+      :title="'私人电台'">
+      <template v-slot:headicon>
+      <i class="bi bi-broadcast"></i></template>
+    </card_wide>
 
   </div>
+  <br>
+  <div class="linkbox">
+    <span style="font-size:1.6em">收藏夹</span>
+    <a :class="(sublistDisplayType=='musiclist')?'active':''" @click="sublistDisplayType='musiclist'">歌单</a>
+    <a  :class="(sublistDisplayType=='albumlist')?'active':''" @click="sublistDisplayType='albumlist'">专辑</a>
+  </div>
+ 
+  <div v-if="sublistDisplayType=='musiclist'&&app.data.myMusicList[0] != undefined">
+    <div class="muLib-MainBox">
 
+      <card_wide v-for="(item,i) in app.data.myMusicList" :key="item.id" :title-style="'small'"
+        @click="this.$router.push({name:'detail',query:{id:item.id }})" :imageSrc="item.coverImgUrl + '?param=16y16'"
+        :activeType="'router'"
+        :title="item.name">
+        <template v-slot:headicon>
+            <i class="bi bi-music-note-list"></i>
+        </template>
+        <template v-slot:describe>
+          <i class="bi bi-archive-fill"></i><span> {{ ' '+item.trackCount+' ' }} </span>
+          <i class="bi bi-ear-fill"></i><span> {{' '+ (item.playCount/10000).toFixed(1) }}w</span>
+        </template>
+      </card_wide>
+    </div>
+  </div>
 
-  <div v-if="app.data.myMusicList[0] != undefined">
-    <h1>我收藏的歌单</h1>
-    <div class="PLtrack">
-      <div class="Pltracks" v-for="(item,i) in app.data.myMusicList" :key="item.id">
-        <div class="PlButtom">
-          <a @click="removePl(item.id,i)">
-            <svg xmlns=" http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x"
-              viewBox="0 0 16 16">
-              <path
-                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-            </svg>
-          </a>
-        </div>
-        <img @click="this.$router.push({name:'detail',query:{id:item.id }})" loading='lazy'
-          :src="item.coverImgUrl + '?param=500y500)'" v-bind:alt="item.name">
-        <div class="PlTrTitle">
-          <h1>{{item.name}}</h1>
-          <h2 v-if="item">by {{item.creator.nickname}}</h2>
-        </div>
-      </div>
+  <div v-if="sublistDisplayType=='albumlist'&&app.data.albumSublist[0] != undefined">
+    <div class="muLib-MainBox">
+
+      <card_wide v-for="(item,i) in app.data.albumSublist" :key="item.id" :title-style="'small'"
+        @click="this.$router.push({name:'album',query:{id:item.id }})" :imageSrc="item.picUrl + '?param=16y16'"
+        :activeType="'router'"
+        :title="item.name">
+        <template v-slot:headicon>
+          <i class="bi bi-disc-fill"></i>
+        </template>
+        <template v-slot:describe>
+          by <span v-for="(artist,index2) in item.artists">{{ artist.name }}<span v-if="index2<item.artists.length-1">&</span></span>
+        </template>
+      </card_wide>
     </div>
   </div>
 </template>
@@ -130,13 +112,13 @@
   import reTools from '../network/getData'
   import message from '../js/message.js'
   import app from '../main.js'
-import card_wide from '../components/card-wide.vue'
+  import card_wide from '../components/card-wide.vue'
   export default {
     name: 'muLib',
     data() {
       return {
         app,
-        myData: {}
+        sublistDisplayType: 'musiclist'
       }
     },
 
@@ -145,7 +127,7 @@ import card_wide from '../components/card-wide.vue'
         this.data = val
       }
     },
-    components:{
+    components: {
       card_wide
     },
     methods: {
@@ -311,7 +293,8 @@ import card_wide from '../components/card-wide.vue'
     gap: 2.5vmin;
     flex-wrap: wrap;
   }
-/* 
+
+  /* 
   .muLib-MainBox>div {
     position: relative;
     font-size: 28px;

@@ -35,8 +35,8 @@ img[src=""]{
 html,
 body {
   padding: 0;
-
-  margin: 0
+  margin: 0;
+  letter-spacing: 0em;
 }
 html{
   background: var(--hsla-white);
@@ -247,14 +247,14 @@ nav {
 .linkbox>a:hover {
   cursor: pointer;
   background: rgb(0, 0, 0, .03);
-  transform: scale(1.05)
+  /* transform: scale(1.05) */
 }
 
 .linkbox a:active {
   transform: scale(.9)
 }
 
-.linkbox a.router-link-exact-active {
+.linkbox a.router-link-exact-active,.linkbox a.active {
   color: #0080ff;
   background: #0080ff15
 }
@@ -264,9 +264,10 @@ input#searchInput,
   font-size: 14px;
   text-decoration: none;
   padding: 5px 10px;
-  border-radius: 2px;
+  border-radius: 5px;
   transition: all .2s cubic-bezier(.3, .45, .2, .95);
-  color: #2c3e50;
+        box-shadow: 0 0 0.3em #0001;
+        color: #2c3e50;
   border: none;
   background: #00000008;
   outline: none;
@@ -1760,7 +1761,7 @@ div.linkbox a {
 
 div.linkbox a:hover {
   background-color: var(--botton-color-background);
-  border: solid .15em var(--botton-color-border)
+  /* border: solid .15em var(--botton-color-border) */
 }
 
 .playerIndexSide>div.linkbox a:hover {

@@ -1,9 +1,10 @@
 <template>
 
     <div class="dlTopLab" style="user-select:none">
-        <img :src="page.pic" alt="" srcset="">
-        <img :src="page.pic" alt="" srcset="">
-        <img :src="page.pic" alt="" srcset="">
+        <img :src="page.pic + '?param=32y32'" />
+        <img-ambilight-vue style="
+        width: 240px;
+        height: 240px;" :src="page.pic"/>
         <div class="dlTopLab-TitleLab">
             <h2>{{this.page.title}}</h2>
             <p>List by <a v-if="page.res.album" v-for="(name) in page.res.album.artists" :key="name.id" @click="this.$router.push({
@@ -105,6 +106,7 @@
     import app from '../main.js'
     import audioNetease from '../js/audioNetease.js'
     import message from '../js/message.js'
+    import imgAmbilightVue from '../components/imgAmbilight.vue'
     var time = new Date().getTime()
     export default {
         name: 'album',
@@ -213,6 +215,9 @@
                 }
             }
         },
+        components:{
+            imgAmbilightVue
+        },
         watch: {
             $route: {
                 handler: function (newVal) {
@@ -247,26 +252,12 @@
         gap: 30px;
         position: relative;
     }
-
     .dlTopLab>img {
         border-radius: 7px;
         --img-size: 240px;
         aspect-ratio: 1/1;
     }
-
-    .dlTopLab>img:nth-child(1) {
-        position: absolute;
-        filter: blur(2rem);
-        z-index: -1;
-        height: calc(var(--img-size) - 30px);
-        margin: 20px 10px 0 10px;
-    }
-
-    .dlTopLab>img:nth-child(2) {
-        height: var(--img-size);
-        border-radius: 7%;
-    }
-    .dlTopLab>img:nth-child(3) {
+    .dlTopLab>img {
         /* height: var(--img-size); */
         /* border-radius: 7%; */
         position: absolute;

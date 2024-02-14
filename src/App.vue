@@ -398,8 +398,8 @@
                 "pic_str": "0",
                 "pic": 0
               },
-              "cp": 1416336,
-              "mv": 10977779,
+              "cp": 0,
+              "mv": 0,
             }]
           },
           ui: {
@@ -411,6 +411,7 @@
           },
           recommendSongs: [],
           myMusicList: [],
+          albumSublist: [],
           musicListInfor: {
             myLove: {
               data: {},
@@ -551,18 +552,6 @@
           for (let index = 0; index < witchIs.length; index++) {
             let thisMusic = this.data.player.tracks[(this.data.player.trackNum + witchIs[index])]
             if (thisMusic != undefined && this.data.player.musicCache[thisMusic.id] == undefined) {
-
-
-              // let color = {
-              //   font:'#000',
-              //   background:'#fff'
-              // }
-              // await picColor(thisMusic.al.picUrl + '?param=24y24').then(result => {
-              //     color.background = result
-              //       })
-              //       let data = Color(color.background[0].color).object()
-              //       color.font = (data.r * 0.299 + data.g * 0.587 + data.b * 0.114) > 186 ? '#000000' :
-              //           '#FFFFFF'
 
               this.data.player.musicCache[thisMusic.id] = {
                 ...await audioNetease.requireId(thisMusic.id),
@@ -720,6 +709,12 @@
         }).then(r => {
           this.data.myMusicList = r.playlist
         })
+        reTools.getData('/album/sublist', {
+          timetamp: (Number(new Date()))
+        }).then(r => {
+          this.data.albumSublist = r.data
+        })
+        
       },
       formTime(sec) { //秒数转化为mm:ss
         let s = sec % 60 < 10 ? ('0' + sec % 60) : sec % 60

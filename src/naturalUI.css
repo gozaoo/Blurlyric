@@ -1,29 +1,31 @@
 
 :root{
     --botton-color-background: rgb(0,0,0,0.08);
-    --botton-color-border: rgb(0,0,0,0.2);
 
 }
 
 .na-bottonBigger,.na-bottonBiggerHover:hover{
     background-color: var(--botton-color-background);
-    border: solid 0.15em var(--botton-color-border);
+    box-shadow: 0 0 0.3em #0001;
 
 }
 .na-bottonBigger,.na-bottonBiggerHover{
     background-color: none;
     padding: 0.5em;
     border-radius: 1.15em;
-    border: solid 0.15em #ffffff00;
+    box-shadow: 0 0 0.3em #0000;
     transition: background-color .2s,border .2s,border-radius 0s;
 }
-div.linkbox a{
-    border: solid 0.15em #ffffff00;
+div.linkbox>a{
+    box-shadow: 0 0 0.3em #0000;
     display: flex;
+  border: solid #0000 1px;
+
 }
 div.linkbox a:hover{
     background-color: var(--botton-color-background);
-    border: solid 0.15em var(--botton-color-border)
+    box-shadow: 0 0 0.3em #0001;
+    border: solid #0001 1px;
 }
 .playerIndexSide>div.linkbox a:hover{
     background-color: var(--botton-color-background);
