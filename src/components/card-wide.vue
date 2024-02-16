@@ -10,11 +10,11 @@
         beforeDestroyed: () => {
         },
         props: {
-            imageSrc: Text,
-            title: Text,
-            describe: Text,
-            activeType: Text,
-            titleStyle: Text
+            imageSrc: String,
+            title: String,
+            describe: String,
+            activeType: String,
+            titleStyle: String
 
         },
         watch: {

@@ -83,7 +83,9 @@
 <template>
     <div class="yrcLine" :style="{'--progress':this.progress}">
         <!-- 使用word的ref作为每个span的引用 -->
-        <span :ref="word.startTime" v-for="word in words" :key="word.startTime">{{ word.word }}</span>
+        <span :class="[
+            (audioDom.currentTime>=word.startTime&&audioDom.currentTime<=word.endTime)?'actived':undefined
+        ]" :ref="word.startTime" v-for="word in words" :key="word.startTime">{{ word.word }}</span>
     </div>
 </template>
 <style scoped>
@@ -100,5 +102,11 @@
         background-repeat: no-repeat;
         color: transparent !important;
         /* will-change:background */
+    }
+    span{
+    }
+    span.actived{
+    
+        /* background: #0005; */
     }
 </style>

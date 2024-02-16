@@ -6,7 +6,7 @@
             }
         },
         props: {
-            src: Text,
+            src: String,
         }}
 </script>
 <template>

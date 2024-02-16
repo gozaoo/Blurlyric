@@ -40,16 +40,27 @@
 
   <div v-if="Pl.length >= 2">
     <h1 style="width: fit-content ">推荐歌单</h1>
-    <div class="PLtrack personalized">
-      <div class="Pltracks" v-for="(item,i) in Pl" :key="item.id">
-        <img @click="this.$router.push({name:'detail',query:{id:item.id }})" loading='lazy' :src="item.picUrl + '?param=500y500)'"
-          v-bind:alt="item.name">
-        <div class="PlTrTitle">
-          <h1>{{item.name}}</h1>
-          <h2 v-if="item.creator">by {{item.creator.nickname}}</h2>
-        </div>
-      </div>
+    <div style="
+    padding: 10px 0;
+    height: max-content;
+    display: flex;
+    gap: 2.5vmin;
+    flex-wrap: wrap;
+  " class="flexRow">
+    <card_wide v-for="(item,i) in Pl" :key="item.id" :title-style="'small'"
+        @click="this.$router.push({name:'detail',query:{id:item.id }})" :imageSrc="item.picUrl + '?param=16y16'"
+        :activeType="'router'"
+        :title="item.name">
+        <template v-slot:headicon>
+            <i class="bi bi-music-note-list"></i>
+        </template>
+        <template v-slot:describe>
+          <i class="bi bi-archive-fill"></i><span> {{ ' '+item.trackCount+' ' }} </span>
+          <i class="bi bi-ear-fill"></i><span> {{' '+ (item.playCount/10000).toFixed(1) }}w</span>
+        </template>
+      </card_wide>
     </div>
+
 
   </div>
 </template>
@@ -58,6 +69,7 @@
   // @ is an alias to /src
   import reTools from "../network/getData.js";
   import app from "../main.js";
+  import card_wide from '../components/card-wide.vue'
   var time = new Date().getTime()
 
 
@@ -71,6 +83,9 @@
         ],
         Pl: []
       }
+    },
+    components:{
+      card_wide
     },
     created() {
       let personalized = app.cacheData('personalized')

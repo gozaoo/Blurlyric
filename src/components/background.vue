@@ -51,8 +51,8 @@
           }
         },
         props: {
-            imgSrc: Object,
-            mainDisplay: Object,
+            imgSrc: String,
+            mainDisplay: String,
             // colorData: Object,
             dynamic: Boolean
         },
