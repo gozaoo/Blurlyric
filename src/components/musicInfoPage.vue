@@ -284,10 +284,11 @@
         border-top: #ddd9 solid 1px;
         height: 100px;
         box-sizing: border-box;
-        padding: 20px;
+        padding: var(--adaptiveSize);
         overflow: hidden;
         background-color: #ddd5;
         backdrop-filter: blur(6vmin) saturate(200%);
+        --adaptiveSize: min(2.5vh, 2vw);
         z-index: 9999;
         box-shadow: 0 0 5vmin #00000005;
         transition: background-color .3s, backdrop-filter 0s 0s;
@@ -455,13 +456,14 @@
         grid-template-columns: [info-side] .75fr [player-side] 1fr;
         gap: 8px;
         transition: .5s ease-in-out;
-        font-size: min(2.5vh, 2vw);
+        font-size: var(--adaptiveSize);
         left: 0%;
         z-index: 0
     }
     .lyricRow {
         grid-column: player-side;
         grid-row: drag-area;
+        margin-top: calc(-1 * var(--adaptiveSize));
     }    
     .coverImage {
         color: rgb(255, 255, 255);

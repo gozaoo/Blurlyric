@@ -85,7 +85,7 @@
             },
             LyricListRender() {
                 let rendingLine = {}
-                let centerTop = window.innerHeight * 0.3
+                let centerTop = window.innerHeight * 0.35
                 let lastTop = centerTop,
                     lastBottom = centerTop
                 let elements = document.querySelectorAll("div>#lyricLine"),
@@ -436,6 +436,7 @@
     .lyricRow {
         display: relative;
         height: 100vh;
+        mask-image: linear-gradient(180deg, transparent, #000 20%, #000 55%, transparent 100%);
     }
 
     .lyricLine {
