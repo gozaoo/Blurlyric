@@ -29,6 +29,7 @@
                     halfWindowHeight: undefined
                 },
                 activeLineIndexs: [],
+                centerLine: 0,
                 lastActiveLineIndexs: [],
                 rendingLine: {}
             }
@@ -44,12 +45,27 @@
             shouldActivateLine(line, currentTime) {
                 return line.startTime <= currentTime && currentTime < line.endTime;
             },
+            // 确定是否需要激活某一行歌词
+            waitForActivateLine(line, currentTime) {
+                return line.startTime >= currentTime
+            },
             updateActiveLines(currentTime) {
                 const activeLines = this.lyric.lines.filter(line =>
                     this.shouldActivateLine(line, currentTime)
                 );
                 const activeLineIndices = activeLines.map(line => this.lyric.lines.indexOf(line));
                 this.activeLineIndexs = activeLineIndices;
+                if(activeLineIndices[0]==undefined){
+                    
+                    const waitForActiveLines = this.lyric.lines.filter(line =>
+                        this.waitForActivateLine(line, currentTime)
+                    );
+                    const waitForActiveLinesIndices = waitForActiveLines.map(line => this.lyric.lines.indexOf(line));
+
+                    this.centerLine = ((waitForActiveLinesIndices[0]!=undefined)?waitForActiveLinesIndices[0]:this.lyric.lines.length)
+                } else {
+                    this.centerLine=activeLineIndices[0]
+                }
             },
             // 计算当前应该激活的歌词行
             LyricCalculate() {
@@ -90,22 +106,23 @@
                     lastBottom = centerTop
                 let elements = document.querySelectorAll("div>#lyricLine"),
                     halfElementOffsetHeight = 0
+                let currentCenterLine = this.centerLine 
                 if (!this.lyric.lines) return
-                if (this.lyric.lines[this.activeLineIndexs[0]] && elements.length > 0) {
-                    const element = elements[this.activeLineIndexs[0]]
+                if (this.lyric.lines[currentCenterLine] && elements.length > 0) {
+                    const element = elements[currentCenterLine]
                     halfElementOffsetHeight = element.offsetHeight / 2
                     lastTop = centerTop - halfElementOffsetHeight
                     lastBottom = centerTop + halfElementOffsetHeight
 
-                    rendingLine[this.activeLineIndexs[0]] = {
-                        index: this.activeLineIndexs[0],
+                    rendingLine[currentCenterLine] = {
+                        index: currentCenterLine,
                         top: centerTop - halfElementOffsetHeight
                     }
                 }
-                if (this.activeLineIndexs[0] == undefined) {
-                    this.activeLineIndexs[0] = -1
+                if (currentCenterLine == undefined) {
+                    currentCenterLine = -1
                 }
-                for (let i = this.activeLineIndexs[0] - 1; lastBottom >= 0; i--) {
+                for (let i = currentCenterLine - 1; lastBottom >= 0; i--) {
                     const element = elements[i];
                     if (element) {
                         lastTop -= element.offsetHeight
@@ -123,7 +140,7 @@
                 lastTop = centerTop - halfElementOffsetHeight
                 lastBottom = centerTop + halfElementOffsetHeight
 
-                for (let i = this.activeLineIndexs[0] + 1; lastTop <= this.tempData.windowHeight; i++) {
+                for (let i = currentCenterLine + 1; lastTop <= this.tempData.windowHeight; i++) {
                     const element = elements[i];
                     if (element) {
                         lastTop = lastBottom
@@ -141,6 +158,7 @@
                 this.rendingLine = rendingLine
             },
             LyricLineRender(useAnimation, newrendingLine, oldrendingLine) {
+
                 let lines = document.querySelectorAll("div>#lyricLine")
                 const self = this
                 let needHiddenIndex = [],
@@ -218,8 +236,14 @@
                                 return (newrendingLine[index]) ? (newrendingLine[index].top + 'px') : ('0')
                             },
                             delay: (el, index, length) => {
-                                return (newrendingLine[index]) ? ((index - self.activeLineIndexs + 3) *
-                                    45) : 0
+                                if((newrendingLine[index])){
+                                    let delay = (newrendingLine[index]) ? ((index - this.centerLine + 3) *
+                                        45) : 0
+                                    return delay
+
+                                } else {
+                                    return 0
+                                }
                             },
                             easing: 'spring(1, 90, 14, 0)',
 
@@ -357,6 +381,8 @@
                     this.$nextTick(() => {
                         this.$nextTick(() => {
                             this.LyricListRender()
+                            this.activeLine(undefined, true)
+
                         })
                     })
                 },
@@ -373,14 +399,16 @@
                     if (!this.deepEqual(newVal, this.lastActiveLineIndexs)) {
                         this.lastActiveLineIndexs = newVal
 
-                        if (!this.deepEqual(newVal, {})) {
-                            this.LyricListRender()
-                        }
                         this.activeLine(undefined, true)
-
                     }
                 },
                 deep: true
+            },
+            centerLine: {
+                handler: async function (newVal, oldVal) {
+                        this.LyricListRender()
+
+                },
             },
             rendingLine: {
                 handler: async function (newVal, oldVal) {

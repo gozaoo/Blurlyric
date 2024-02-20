@@ -33,6 +33,7 @@ export default {
                         duration = Number(wordDuration) / 1000;
                     let endTime = Number((startTime + duration).toFixed(3))
 
+                    if(word=='')return'';
                     words.push({
                         startTime,
                         duration,
@@ -46,7 +47,7 @@ export default {
                     text+=element.word
                 });
                 lyrics.lines.push({
-                    startTime,
+                    startTime:words[0].startTime,
                     duration,
                     endTime: words[words.length-1].endTime,
                     words,
