@@ -188,7 +188,8 @@
         data() {
             return {
                 app,
-                displayType: 0
+                displayType: 0,
+                downloadIndex: 0,
             }
         },
         async created() {
@@ -208,31 +209,83 @@
                 }
                 time = tempTime
             },
+            // async downloadThisPage() {
+            //     for (let i = 0; i < app.data.player.tracks.length; i++) {
+            //         let id = app.data.player.tracks[i].id
+            //         audioNetease.requireURL(id).then(async (data) => {
+            //             console.log(data.song[data.song.use].url);
+            //             let response = await fetch(data.song[data.song.use].url)
+            //             let blob = await response.blob();
+            //             let objectUrl = window.URL.createObjectURL(blob);
+
+            //             let a = document.createElement("a");
+            //             a.href = objectUrl;
+            //             let name = ''
+            //             for (let num in app.data.player.tracks[i].ar) {
+            //                 name += app.data.player.tracks[i].ar[num].name;
+            //                 if (app.data.player.tracks[i].ar.length - num > 1) {
+            //                     name += '&'
+            //                 }
+            //             }
+            //             a.download = app.data.player.tracks[i].name + ' - ' + name + '.mp3';
+            //             a.click();
+            //             a.remove()
+            //         })
+
+
+            //     }
+                
             async downloadThisPage() {
-                for (let i = 0; i < app.data.player.tracks.length; i++) {
-                    let id = app.data.player.tracks[i].id
-                    audioNetease.requireURL(id).then(async (data) => {
-                        console.log(data.song[data.song.use].url);
-                        let response = await fetch(data.song[data.song.use].url)
-                        let blob = await response.blob();
-                        let objectUrl = window.URL.createObjectURL(blob);
-
-                        let a = document.createElement("a");
-                        a.href = objectUrl;
-                        let name = ''
-                        for (let num in app.data.player.tracks[i].ar) {
-                            name += app.data.player.tracks[i].ar[num].name;
-                            if (app.data.player.tracks[i].ar.length - num > 1) {
-                                name += '&'
+                let i = this.downloadIndex
+                const tracks = app.data.player.tracks
+                let step = async () => {
+                    i = this.downloadIndex
+                    try {
+                        let id = tracks[i].id
+                        audioNetease.requireURL(id).then(async (data) => {
+                            let name = ''
+                            for (let num in tracks[i].ar) {
+                                name += tracks[i].ar[num].name;
+                                if (tracks[i].ar.length - num > 1) {
+                                    name += '&'
+                                }
                             }
-                        }
-                        a.download = app.data.player.tracks[i].name + ' - ' + name + '.mp3';
-                        a.click();
-                        a.remove()
-                    })
+                            let alia = ''
+                            for (let num in tracks[i].alia) {
+                                alia += '（' + tracks[i].alia[num] + '）';
+                            }
+                            let ids = {
+                                title: tracks[i].name,
+                                artist: name,
+                                album: tracks[i].al.name,
+                                '#': i
+                            }
+                            reTools.getData('/blurlyric/downloadUrl', {
+                                url: data.song[data.song.use].url,
+                                fileName: '[ ' + (i + 1) + ' ]' + tracks[i]
+                                    .name + alia + ' - ' + name + ((data.song[data.song
+                                        .use].br < 900000) ? '.mp3' : '.flac'),
+                                ids: JSON.stringify(ids)
+                                    })
+                            message.create('[ ' + (i + 1) + ' ]已发送请求至下载服务器< =' + this.page
+                                .track[i].name + alia + ' - ' + name)
+                                this.downloadIndex++
+                            if (i < tracks.length) {
+                                step()
+                            }
+                        })
+                    } catch (error) {
+                        message.create('[ ' + (i + 1) + ' ]无法下载')
 
+                        this.downloadIndex++
+                        if (i < tracks.length) {
+                            step()
+                        }
+                    }
 
                 }
+                step()
+
             },
 
             downGo(array, index) {

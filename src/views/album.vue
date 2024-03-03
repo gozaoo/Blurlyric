@@ -65,6 +65,7 @@
                     </svg>
                 </a>
             </div>
+            {{ downloadIndex }}
         </div>
     </div>
 
@@ -125,6 +126,7 @@
                     track: [],
                     res: {}
                 },
+                downloadIndex: 0,
                 loading: true
             }
         },
@@ -160,29 +162,57 @@
                 time = tempTime
             },
             async downloadThisPage() {
-                for (let i = 0; i < this.page.track.length; i++) {
-                    let id = this.page.track[i].id
-                    audioNetease.requireURL(id).then(async (data) => {
-                        let response = await fetch(data.song[data.song.use].url)
-                        let blob = await response.blob();
-                        let objectUrl = window.URL.createObjectURL(blob);
+                let i = this.downloadIndex
 
-                        let a = document.createElement("a");
-                        a.href = objectUrl;
-                        let name = ''
-                        for (let num in this.page.track[i].ar) {
-                            name += this.page.track[i].ar[num].name;
-                            if (this.page.track[i].ar.length - num > 1) {
-                                name += '&'
+                let step = async () => {
+                    i = this.downloadIndex
+                    try {
+                        let id = this.page.track[i].id
+                        audioNetease.requireURL(id).then(async (data) => {
+                            let a = document.createElement("a");
+                            let name = ''
+                            for (let num in this.page.track[i].ar) {
+                                name += this.page.track[i].ar[num].name;
+                                if (this.page.track[i].ar.length - num > 1) {
+                                    name += '&'
+                                }
                             }
-                        }
-                        a.download = this.page.track[i].name + ' - ' + name + '.mp3';
-                        a.click();
-                        a.remove()
-                    })
+                            let alia = ''
+                            for (let num in this.page.track[i].alia) {
+                                alia += '（' + this.page.track[i].alia[num] + '）';
+                            }
+                            let ids = {
+                                title: this.page.track[i].name,
+                                artist: name,
+                                album: this.page.track[i].al.name,
+                                '#': i
+                            }
+                            reTools.getData('/blurlyric/downloadUrl', {
+                                url: data.song[data.song.use].url,
+                                fileName: '[ ' + (i + 1) + ' ]' + this.page.track[i]
+                                    .name + alia + ' - ' + name + ((data.song[data.song
+                                        .use].br < 900000) ? '.mp3' : '.flac'),
+                                ids: JSON.stringify(ids)
+                                    })
+                            message.create('[ ' + (i + 1) + ' ]已发送请求至下载服务器< =' + this.page
+                                .track[i].name + alia + ' - ' + name)
+                                this.downloadIndex++
+                            if (i < this.page.track.length) {
+                                step()
+                            }
+                        })
+                    } catch (error) {
+                        message.create('[ ' + (i + 1) + ' ]无法下载')
 
+                        this.downloadIndex++
+                        if (i < this.page.track.length) {
+                            step()
+                        }
+                    }
 
                 }
+                step()
+
             },
             loadDeailList(force) {
                 this.loading = true

@@ -60,12 +60,16 @@
                     </svg>
                 </a>
             </div>
+            {{ downloadIndex }}
         </div>
     </div>
 
-    <h2>歌曲列表<a v-if="page.res.playlist" style="font-size:0.7em;color: rgba(0,0,0,.5)">{{'  '+page.res.playlist.trackIds.length - 1}}首</a></h2>
+    <h2>歌曲列表<a v-if="page.res.playlist"
+            style="font-size:0.7em;color: rgba(0,0,0,.5)">{{'  '+page.res.playlist.trackIds.length - 1}}首</a></h2>
     <div class="track playlist">
-        <atrack :state="app.state" @click="playTheOnce(i)" v-for="(item,i) in (displayMore == false)?page.mintrack:page.track" :muid="item.id" :key="item.id" :i="i" :item="item"></atrack>
+        <atrack :state="app.state" @click="playTheOnce(i)"
+            v-for="(item,i) in (displayMore == false)?page.mintrack:page.track" :muid="item.id" :key="item.id" :i="i"
+            :item="item"></atrack>
 
     </div>
     <br>
@@ -84,7 +88,7 @@
 
     export default {
         name: 'detailList',
-        components:{
+        components: {
             atrack
         },
         data() {
@@ -100,11 +104,12 @@
                     lastUpdae: '',
                     aRtrackIds: [],
                     track: [],
-                    mintrack:[],
+                    mintrack: [],
                     res: {}
                 },
                 loading: true,
                 displayMore: true,
+                downloadIndex: 0
             }
         },
         async created() {
@@ -139,39 +144,50 @@
                 time = tempTime
             },
             async downloadThisPage() {
-                let i = 0
+                let i = this.downloadIndex
 
-                let step=async ()=>{
+                let step = async () => {
+                    i = this.downloadIndex
                     try {
                         let id = this.page.track[i].id
                         audioNetease.requireURL(id).then(async (data) => {
-                        let a = document.createElement("a");
-                        let name = ''
-                        for (let num in this.page.track[i].ar) {
-                            name += this.page.track[i].ar[num].name;
-                            if (this.page.track[i].ar.length - num > 1) {
-                                name += '&'
+                            let a = document.createElement("a");
+                            let name = ''
+                            for (let num in this.page.track[i].ar) {
+                                name += this.page.track[i].ar[num].name;
+                                if (this.page.track[i].ar.length - num > 1) {
+                                    name += '&'
+                                }
                             }
-                        }
-                        let alia = ''
-                        for (let num in this.page.track[i].alia) {
-                            alia += '（'+this.page.track[i].alia[num]+'）';
-                        }
-                        reTools.getData('/blurlyric/downloadUrl',{
-                            url: data.song[data.song.use].url,
-                            fileName: '[ '+(i+1)+' ]' + this.page.track[i].name+alia + ' - ' + name + ((data.song[data.song.use].br < 900000)?'.mp3':'.flac')
+                            let alia = ''
+                            for (let num in this.page.track[i].alia) {
+                                alia += '（' + this.page.track[i].alia[num] + '）';
+                            }
+                            let ids = {
+                                title: this.page.track[i].name,
+                                artist: name,
+                                album: this.page.track[i].al.name,
+                                '#': i
+                            }
+                            reTools.getData('/blurlyric/downloadUrl', {
+                                url: data.song[data.song.use].url,
+                                fileName: '[ ' + (i + 1) + ' ]' + this.page.track[i]
+                                    .name + alia + ' - ' + name + ((data.song[data.song
+                                        .use].br < 900000) ? '.mp3' : '.flac'),
+                                ids: JSON.stringify(ids)
+                                    })
+                            message.create('[ ' + (i + 1) + ' ]已发送请求至下载服务器< =' + this.page
+                                .track[i].name + alia + ' - ' + name)
+                                this.downloadIndex++
+                            if (i < this.page.track.length) {
+                                step()
+                            }
                         })
-                        message.create('[ '+(i+1)+' ]已发送请求至下载服务器< =' + this.page.track[i].name+alia + ' - ' + name )
-                        i++
-                        if(i<this.page.track.length){
-                            step()
-                        }
-                    })
                     } catch (error) {
-                        message.create('[ '+(i+1)+' ]无法下载')
+                        message.create('[ ' + (i + 1) + ' ]无法下载')
 
-                        i++
-                        if(i<this.page.track.length){
+                        this.downloadIndex++
+                        if (i < this.page.track.length) {
                             step()
                         }
                     }
@@ -206,28 +222,32 @@
 
                             this.page.lastUpdae = new Date(this.page.res.playlist.updateTime).toLocaleString()
                             this.page.track = []
-                            for (let track = 0; track < (this.page.trackIds.slice(track*1000,(track + 1)*1000).length/1000); track++) {
-                                
-                                for (const num in this.page.trackIds.slice(track*1000,(track + 1)*1000)) {
-                                trackIDList += this.page.trackIds.slice(track*1000,(track + 1)*1000)[num].id
-                                this.page.aRtrackIds.push(this.page.trackIds.slice(track*1000,(track + 1)*1000)[num].id)
-                                    if (num < this.page.trackIds.slice(track*1000,(track + 1)*1000).length - 1) {
+                            for (let track = 0; track < (this.page.trackIds.slice(track * 1000, (track + 1) * 1000)
+                                    .length / 1000); track++) {
+
+                                for (const num in this.page.trackIds.slice(track * 1000, (track + 1) * 1000)) {
+                                    trackIDList += this.page.trackIds.slice(track * 1000, (track + 1) * 1000)[num]
+                                        .id
+                                    this.page.aRtrackIds.push(this.page.trackIds.slice(track * 1000, (track + 1) *
+                                        1000)[num].id)
+                                    if (num < this.page.trackIds.slice(track * 1000, (track + 1) * 1000).length -
+                                        1) {
                                         trackIDList += ','
                                     }
                                 }
-                            
+
                                 this.page['trackIdsContent'] = trackIDList
                                 reTools.getData('/song/detail', {
                                     ids: trackIDList,
                                     timetamp: (Number(new Date()))
                                 }).then(res => {
-                                    
+
                                     this.page.track = [...this.page.track, ...res.songs]
                                     app.cacheData('playlist' + this.page.id, this.page)
                                     this.loading = false
 
                                 })
-                                
+
                             }
 
 
@@ -241,19 +261,19 @@
                 handler: function (newVal) {
                     if (this.$route.name == 'detail') {
                         this.page = {
-                                id: newVal.query.id,
-                                pic: '',
-                                title: 'xxxxxx',
-                                content: '',
-                                creater: 'xxx',
-                                trackIds: '',
-                                lastUpdae: '',
-                                aRtrackIds: [],
-                                track: [],
-                                mintrack:[],
-                                res: {}
-                            }
-                            this.loading = true
+                            id: newVal.query.id,
+                            pic: '',
+                            title: 'xxxxxx',
+                            content: '',
+                            creater: 'xxx',
+                            trackIds: '',
+                            lastUpdae: '',
+                            aRtrackIds: [],
+                            track: [],
+                            mintrack: [],
+                            res: {}
+                        }
+                        this.loading = true
                         this.loadDeailList()
                     }
                 },
@@ -300,7 +320,7 @@
         width: calc(100% + 3rem);
         top: -1.5rem;
         left: -1.5rem;
-        filter:  brightness(3) contrast(3) blur(2.5rem);
+        filter: brightness(3) contrast(3) blur(2.5rem);
         z-index: -2;
     }
 

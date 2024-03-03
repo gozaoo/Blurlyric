@@ -1,8 +1,5 @@
 <!--lyric.vue-->
 <script>
-    import {
-        transform
-    } from '@vue/compiler-core';
     import anime from 'animejs/lib/anime.es';
     import elemListener from '../js/elemListener';
     import lyricParser from '../js/lyricParser.js'
@@ -70,7 +67,7 @@
             // 计算当前应该激活的歌词行
             LyricCalculate() {
                 if (this.lyric.type !== 'none') {
-                    this.state.nowTime = this.audioDom.currentTime+0.3;
+                    this.state.nowTime = this.audioDom.currentTime+0.2;
                     this.updateActiveLines(this.state.nowTime);
 
                     // 如果正在渲染歌词画面，则继续
@@ -434,6 +431,7 @@
             }
             elemListener.onWindowsResize(() => {
                 cacheWindowHeight();
+                this.LyricListRender()
             })
             this.$nextTick(cacheWindowHeight)
         }
@@ -444,7 +442,7 @@
         <div v-for="(item, index) in lyric.lines" style="transform:translateY(100vh) " :key="item.startTime" id="lyricLine"
             class="lyricLine">
 
-            <div style="color:rgb(0, 0, 0,0);transform:scale(0.9)" class="lyricTextRow">
+            <div style="color:rgb(0, 0, 0,0);transform:scale(0.9)" :class="['lyricTextRow',(activeLineIndexs.includes(index))?'focus':'blur']">
 
                 <div v-if="item" class="content">
                     <div v-if="lyric.type == 'lrc'">{{ item.text }}</div>
@@ -483,6 +481,10 @@
         transform: scale(0.9);
         will-change: transform, color;
         transform-origin: 3% 50%;
+        transition: .6s filter;
+    }
+    .lyricTextRow.blur{
+        /* filter: blur(.1em) */
     }
 
     div.content {
