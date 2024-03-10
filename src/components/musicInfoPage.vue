@@ -94,11 +94,14 @@
                             })
                         }, 400);
                         this.windowsResizeReturn = elemListener.onWindowsResize(() => {
-                            this.$refs.coverImage.style.left = this.childRefs.coverImagePlaceHolder.offsetLeft +
-                                'px'
-                            this.$refs.coverImage.style.top = this.childRefs.coverImagePlaceHolder.offsetTop + 'px'
-                            this.$refs.coverImage.style.height = this.childRefs.coverImagePlaceHolder.offsetHeight +
-                                'px'
+
+                        anime({
+                            easing: 'spring(1, 100, 60,  10)',
+                            targets: this.$refs.coverImage,
+                            left: this.childRefs.coverImagePlaceHolder.offsetLeft,
+                            top: this.childRefs.coverImagePlaceHolder.offsetTop,
+                            height: this.childRefs.coverImagePlaceHolder.offsetWidth + 'px',
+                        })
                         })
                         break;
 
@@ -258,7 +261,7 @@
         --adaptiveSize: min(2.5vh, 2vw);
         z-index: 9999;
         box-shadow: 0 0 5vmin #00000005;
-        transition: background-color .3s, backdrop-filter 0s 0s;
+        transition: background-color .3s, backdrop-filter 0s 0s,var(--adaptiveSize) 0s;
     }
 
     .player:hover {
@@ -335,7 +338,7 @@
         /* filter: blur(2vmin) */
         border: #0001 solid 1px;
         display: none;
-        transition: display 0 0s;
+        /* transition: display 0 0s; */
 
     }
 

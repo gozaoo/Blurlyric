@@ -28,7 +28,8 @@
                 activeLineIndexs: [],
                 centerLine: 0,
                 lastActiveLineIndexs: [],
-                rendingLine: {}
+                rendingLine: {},
+                windowsResizeReturn: ()=>{}
             }
         },
         components:{
@@ -153,6 +154,7 @@
                 }
 
                 this.rendingLine = rendingLine
+                return rendingLine
             },
             LyricLineRender(useAnimation, newrendingLine, oldrendingLine) {
 
@@ -339,8 +341,9 @@
 
         },
         beforeDestroyed: () => {
-            clearInterval(intervalIDs.LyricCalculate);
-            clearInterval(intervalIDs.wfwLyricCalculate);
+            clearInterval(this.intervalIDs.LyricCalculate);
+            clearInterval(this.intervalIDs.wfwLyricCalculate);
+            this.windowsResizeReturn.removeWindowsResize()
         },
         props: {
             audioDom: HTMLAudioElement,
@@ -421,18 +424,17 @@
             this.checkConfig()
             this.LyricCalculateIntervalLuncher()
             let cacheWindowHeight = () => {
-                this.$nextTick(() => {
                     this.tempData.windowHeight = window.innerHeight
                     this.tempData.halfWindowHeight = self.tempData.windowHeight / 2
-                    this.$nextTick(() => {
-                        this.LyricListRender()
-                    })
-                })
             }
-            elemListener.onWindowsResize(() => {
+            this.windowsResizeReturn = elemListener.onWindowsResize(() => {
+
                 cacheWindowHeight();
-                this.LyricListRender()
-            })
+                // console.log(
+                    this.LyricListRender()
+                // ); 
+
+            },0)
             this.$nextTick(cacheWindowHeight)
         }
     }

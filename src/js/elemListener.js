@@ -130,12 +130,15 @@ export default {
         }
     },
     
-    onWindowsResize(fn) {
+    onWindowsResize(fn,times) {
         let retunFunction = () => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                fn();
-            }, 100); // 延迟100毫秒执行fn
+            console.log(timeout);;
+            requestAnimationFrame(()=>{
+                timeout = setTimeout(() => {
+                    fn();
+                }, times||100);
+
+            })
         }
         window.addEventListener('resize', retunFunction);
     return {removeWindowsResize: ()=>window.removeEventListener('resize',retunFunction)}

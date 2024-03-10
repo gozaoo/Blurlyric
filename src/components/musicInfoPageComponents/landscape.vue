@@ -107,7 +107,7 @@ import { onMounted } from 'vue'
         grid-template-rows: [drag-area] minmax(30px, 1fr) [thumb] auto [cover] auto [music-info] 3fr 1fr;
         grid-template-columns: [info-side] .75fr [player-side] 1fr;
         gap: 8px;
-        transition: .5s ease-in-out;
+        /* transition: .5s ease-in-out; */
         font-size: var(--adaptiveSize);
         left: 0%;
         z-index: 0
@@ -126,6 +126,8 @@ import { onMounted } from 'vue'
         grid-row: cover;
         align-self: center;
         justify-self: center;
+        margin-top: var(--adaptiveSize);
+        margin-bottom: calc( - var(--adaptiveSize));
         width: min(50vh, 40vw);
         height: min(50vh, 40vw);
         background-position: center;
