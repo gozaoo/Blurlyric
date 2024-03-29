@@ -1,14 +1,15 @@
 <script>
 import { onMounted } from 'vue'
     import lyricVue from "../lyric.vue";
-
+    import aliveButtom from '../../aliveComponents/alive-buttom.vue';
 
     export default {
         data() {
 
         },
         components:{
-            lyricVue
+            lyricVue,
+            aliveButtom
         },
         methods:{
             
@@ -89,6 +90,7 @@ import { onMounted } from 'vue'
                             <path d="M544 672V352h-48L416 409.6l16 41.6 60.8-41.6V672z" p-id="1851"></path>
                         </svg>
                     </button></div>
+
 
             </div>
             <lyricVue class="lyricRow" :importedConfig="{
@@ -231,5 +233,10 @@ import { onMounted } from 'vue'
         font-size: 0.6em;
         flex-direction: row;
         justify-content: space-between
+    }
+    .menuSelecterBar{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>

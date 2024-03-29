@@ -223,9 +223,9 @@
                                 delay: (el, index, length) => {
                                     return (newrendingLine[info.index]) ? ((info.index - self
                                             .activeLineIndexs + 3) *
-                                        45) : 0
+                                        50) : 0
                                 },
-                                easing: 'spring(1, 90, 14, 0)',
+                                easing: 'spring(1, 90, 14.5, 0)',
 
                             })
                         })
@@ -237,14 +237,14 @@
                             delay: (el, index, length) => {
                                 if((newrendingLine[index])){
                                     let delay = (newrendingLine[index]) ? ((index - this.centerLine + 3) *
-                                        45) : 0
+                                        50) : 0
                                     return delay
 
                                 } else {
                                     return 0
                                 }
                             },
-                            easing: 'spring(1, 90, 14, 0)',
+                            easing: 'spring(1, 90, 14.5, 0)',
 
                         })
                     }

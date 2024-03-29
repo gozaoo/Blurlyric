@@ -78,7 +78,7 @@
     <div class="yrcLine" :style="{'--progress':this.progress}">
         <!-- 使用word的ref作为每个span的引用 -->
         <span :class="[
-            (audioDom.currentTime>=word.startTime&&audioDom.currentTime<=word.endTime)?'actived':undefined
+            (audioDom.currentTime + 0.3>=word.startTime)?((audioDom.currentTime+0.3<=word.endTime)?'activing':'actived'):undefined
         ]" :ref="word.startTime" v-for="word in words" :key="word.startTime">{{ word.word }}</span>
     </div>
 </template>
@@ -89,7 +89,7 @@
         background-origin: content-box;
         background-clip: text;
         /* --background-transition-linear-gradient-progress-width: 0em !important; */
-        --background-transition-linear-gradient-progress-width: 0.628em !important;
+        --background-transition-linear-gradient-progress-width: 0.942em !important;
         background: linear-gradient(90deg, rgb(0, 0, 0, .6) 0%, rgb(0, 0, 0, .6) calc(50% - calc(var(--background-transition-linear-gradient-progress-width)/2)), rgba(0, 0, 0, .3) calc(50% + calc(var(--background-transition-linear-gradient-progress-width)/2)), rgba(0, 0, 0, .3) 100%);
         background-size: calc(200% + var(--background-transition-linear-gradient-progress-width) * 2) 100%;
         -webkit-background-clip: text;
@@ -101,6 +101,12 @@
     }
     span{
     }
-    span.actived{
+    span.activing{
+
     }
+    span.activing,span.actived{
+        /* display: ; */
+         /* transform: translate(10px, 20px); */
+         /* font-size: 0.9=em; */
+}
 </style>

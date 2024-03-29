@@ -193,6 +193,7 @@ this.close()
         width: 250px;
         overflow: hidden;
         height: 360px;
+        box-shadow: 0 0 5vmin #00000005;
         padding: 16px;
         background: white;
         border-radius: 13px;
