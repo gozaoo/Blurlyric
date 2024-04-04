@@ -1,16 +1,19 @@
 body{
-  background-color: #ddd;
-  /* backdrop-filter: blur(1px); */
+  background-color: transparent;
   padding: none;
   margin: none;
   font-family: Misans;
-  /* backdrop-filter: blur(15px); */
+  /* background-color: rgb(238,238,238); */
   overflow: hidden;
-}
-main {
-  background: transparent;
 }
 @font-face {
   font-family: MiSans;
   src: local('MiSans'), url('./assets/MiSans-Normal.ttf');
+}
+:root{
+    --mainBlockBackground: #ddd;
+    --color-toggle-actived: rgb(0,122,204)
+}
+body{
+  background-color: var(--mainBlockBackground);
 }

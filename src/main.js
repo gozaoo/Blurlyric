@@ -16,5 +16,3 @@ const router = createRouter({
 vueApp.use(router)
 
 vueApp.mount('#app')
-
-export default vueApp
